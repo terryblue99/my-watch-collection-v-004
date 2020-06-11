@@ -11,7 +11,7 @@ const LogIn = (props) => {
     const currentUser = useSelector(state => state.currentUser)
     const dispatch = useDispatch()
 
-    handleChange = (event) => {
+    const handleChange = (event) => {
         const {name, value} = event.target
         setUserData(prevUserData => {
             return {
@@ -21,7 +21,7 @@ const LogIn = (props) => {
         })
     }
 
-    handleSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault()
         dispatch(logInAction({ user: userData }))
     }
@@ -54,7 +54,7 @@ const LogIn = (props) => {
                                 <input autoFocus className='LogIn-input-element' required 
                                     type='email'
                                     name='email'
-                                    onChange={this.handleChange}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <br /> 
