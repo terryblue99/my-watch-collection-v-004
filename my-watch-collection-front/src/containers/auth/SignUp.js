@@ -7,7 +7,7 @@ import ClearForm from "../../components/ClearForm"
 import SetFocus from "../../components/SetFocus"
 import RedirectToWithState from '../../components/RedirectToWithState'
 
-const SignUp = (props) => {
+const SignUp = () => {
 
     const [userData, setUserData] = useState({email: '', password: '', password_confirmation: ''})
     const currentUser = useSelector(state => state.currentUser)
