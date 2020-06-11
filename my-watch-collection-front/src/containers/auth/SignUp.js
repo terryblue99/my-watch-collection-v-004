@@ -13,7 +13,7 @@ const SignUp = () => {
     const currentUser = useSelector(state => state.currentUser)
     const dispatch = useDispatch()
 
-    handleChange = (event) => {
+    const handleChange = (event) => {
         const {name, value} = event.target
         setUserData(prevUserData => {
             return {
@@ -23,7 +23,7 @@ const SignUp = () => {
         })
     }
 
-    handleSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault()
 
         if (userData.password.length < 8 ) {
@@ -66,7 +66,7 @@ const SignUp = () => {
                                 <input autoFocus id='Focus-SignUp-Email' className='SignUp-input-element' required 
                                     type='email'
                                     name='email'
-                                    onChange={this.handleChange}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <br /> 
@@ -75,7 +75,7 @@ const SignUp = () => {
                                 <input className='SignUp-input-element' required 
                                     type='password'
                                     name='password'
-                                    onChange={this.handleChange}
+                                    onChange={handleChange}
                                 />
                                 </div>
                             <br />
@@ -84,7 +84,7 @@ const SignUp = () => {
                                 <input className='SignUp-input-element' required 
                                     type='password'
                                     name='password_confirmation'
-                                    onChange={this.handleChange}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <br />
