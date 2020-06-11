@@ -1,5 +1,5 @@
-import React from 'react'
-import { useState, useSelector, useDispatch } from 'react-redux'
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import logo from '../../images/logo.jpg'
 import { logInAction } from "../../actions/currentUserActions.js"
