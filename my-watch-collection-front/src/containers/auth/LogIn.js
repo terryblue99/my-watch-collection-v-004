@@ -63,7 +63,7 @@ const LogIn = (props) => {
                                 <input className='LogIn-input-element' required 
                                     type='password'
                                     name='password'
-                                    onChange={this.handleChange}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <br />

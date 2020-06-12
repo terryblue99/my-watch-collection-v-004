@@ -10,6 +10,7 @@ export default (state = null, { type, payload }) => {
   switch (type) { 
 
     case SET_CURRENT_USER:
+      alert('SET_CURRENT_USER payload email: ' + payload.email)
       if (payload) {     
         return payload
       } else return state

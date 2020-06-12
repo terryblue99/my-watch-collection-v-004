@@ -5,9 +5,10 @@ import {
   DELETE_USER
 } from './types'
 
-const API_URL = '/api/v3'
+const API_URL = '/api/v4'
 
 export const logInAction = (credentials) => {
+  // alert('credentials: ' + credentials.user.email + ' ' + credentials.user.password)
   return dispatch => {
     return fetch(`${API_URL}/sessions`, {
       credentials: "include",
@@ -30,6 +31,7 @@ export const logInAction = (credentials) => {
             alert('Account not found, please retry or Sign Up!')
             window.location.assign('/home')
           } else {
+            alert('response2: ' + response.text)
             dispatch({
               type: SET_CURRENT_USER,
               payload: response
