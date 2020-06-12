@@ -31,7 +31,7 @@ export const logInAction = (credentials) => {
             alert('Account not found, please retry or Sign Up!')
             window.location.assign('/home')
           } else {
-            alert('response2: ' + response.text)
+            alert('response password: ' + response.user.password)
             dispatch({
               type: SET_CURRENT_USER,
               payload: response
