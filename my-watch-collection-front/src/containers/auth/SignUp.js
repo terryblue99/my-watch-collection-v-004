@@ -58,7 +58,7 @@ const SignUp = () => {
                 <img src={logo} alt='logo' className='Logo'/>
                 <div className='SignUp-container'>
                     <form id='SignUp-Form' 
-                            onSubmit={this.handleSubmit}
+                            onSubmit={handleSubmit}
                     >
                         <div className='Register Center-text'>
                             <div className='SignUp-element Cornsilk-color'>
