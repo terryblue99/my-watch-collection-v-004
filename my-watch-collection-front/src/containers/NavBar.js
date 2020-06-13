@@ -12,7 +12,7 @@ const NavBar = () => {
   const watches = useSelector(state => state.myWatches.watches)
   const dispatch = useDispatch()
 
-  handleChange = (event) => {
+  const handleChange = (event) => {
         setSearchData(prevSearchData => {
             return {
               ...prevSearchData,
@@ -21,7 +21,7 @@ const NavBar = () => {
         })
   }
 
-  handleSearch = (event) => {
+  const handleSearch = (event) => {
     event.preventDefault()
     dispatch(searchWatchesAction(searchData.searchText))
     setSearchData(prevSearchData => {
@@ -98,7 +98,7 @@ const NavBar = () => {
                   Log Out   
                 </NavLink>
                 <NavLink  className='Nav-link Nav-edit-profile-link Cornsilk-color' to='/edit_profile'
-                          onClick={() => {className=' active'}}>
+                          onClick={() => {this.className=' active'}}>
                   Edit Profile   
                 </NavLink>
               </>
