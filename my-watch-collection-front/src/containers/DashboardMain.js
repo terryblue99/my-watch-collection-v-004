@@ -188,7 +188,7 @@ class DashboardMain extends Component {
                       hashHistory.push(`/watches/${this.props.newestWatch.id}/watch_detail`) // set the url for the watch
                       this.props.setCurrentWatch(this.props.newestWatch)
                     }}>
-                    <img src={newestWatchImage} alt='oldest watch' className='Watch-image Dashboard-watch-image'/>
+                    <img src={newestWatchImage} alt='newest watch' className='Watch-image Dashboard-watch-image'/>
               </span>
             : null
           }
