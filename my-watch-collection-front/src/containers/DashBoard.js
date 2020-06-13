@@ -13,9 +13,10 @@ const DashBoard = (props) => {
 
     useEffect(() => {  
         if (!props.location.state || props.location.state.isEdits) {
+            alert('useEffect!')
             dispatch(getWatchesAction(currentUser.user.id)) 
         }   
-    })
+    },[currentUser, dispatch, props.location.state])
 
     let sortOptionSelected = 'Select a sort option...'
     let isSearchSuccessful
