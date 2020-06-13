@@ -5,15 +5,17 @@ import NavBar from './NavBar'
 import Watches from '../components/Watches'
 
 const DashBoard = (props) => {
-    alert('Now in DashBoard!')
+    
     const currentUser = useSelector(state => state.currentUser)
     const watches = useSelector(state => state.myWatches.watches)
     const watchRelated = useSelector(state => state.myWatches.watchRelated)
     const dispatch = useDispatch()
 
     useEffect(() => {  
-        dispatch(getWatchesAction(currentUser.user.id))   
-    }, [!props.location.state || props.location.state.isEdits])
+        if (!props.location.state || props.location.state.isEdits) {
+            dispatch(getWatchesAction(currentUser.user.id)) 
+        }   
+    })
 
     let sortOptionSelected = 'Select a sort option...'
     let isSearchSuccessful

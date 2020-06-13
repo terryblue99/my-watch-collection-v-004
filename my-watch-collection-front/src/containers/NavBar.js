@@ -98,7 +98,7 @@ const NavBar = () => {
                   Log Out   
                 </NavLink>
                 <NavLink  className='Nav-link Nav-edit-profile-link Cornsilk-color' to='/edit_profile'
-                          onClick={() => {this.className=' active'}}>
+                          onClick={() => {NavLink.className=' active'}}>
                   Edit Profile   
                 </NavLink>
               </>
