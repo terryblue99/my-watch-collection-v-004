@@ -13,12 +13,13 @@ const NavBar = () => {
   const dispatch = useDispatch()
 
   const handleChange = (event) => {
-        setSearchData(prevSearchData => {
-            return {
-              ...prevSearchData,
-              searchText: event.target.value
-            }
-        })
+    const {value} = event.target
+    setSearchData(prevSearchData => {
+        return {
+          ...prevSearchData,
+          searchText: value
+        }
+    })
   }
 
   const handleSearch = (event) => {
