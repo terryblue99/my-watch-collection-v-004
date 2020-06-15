@@ -102,12 +102,6 @@ const EditProfile = () => {
      }
      
      if (stateData.isBackToDashboard) {
-          setStateData(prevStateData => {
-               return {
-                    ...prevStateData,
-                    isBackToDashboard: false
-               }
-          })
           return RedirectTo('/dashboard')
      }
      
