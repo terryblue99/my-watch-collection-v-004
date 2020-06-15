@@ -8,7 +8,7 @@ import RedirectToWithState from '../components/RedirectToWithState'
 const NavBar = () => {
 
   const [searchData, setSearchData] = useState({isSearchRequested: false, searchText: ''})
-  const user = useSelector(state => state.currentUser)
+  const currentUser = useSelector(state => state.currentUser)
   const watches = useSelector(state => state.myWatches.watches)
   const dispatch = useDispatch()
 
@@ -90,10 +90,10 @@ const NavBar = () => {
         <nav className='Nav'>
 
           <div className='Nav-links'> 
-            {user.logged_in} {
+            {currentUser.logged_in} {
               <>
                 <div  className='Nav-logged_in-as'>
-                  Logged in as: {user.email}
+                  Logged in as: {currentUser.user.email}
                 </div>
                 <NavLink  className='Nav-log_out-link Cornsilk-color' to='/logout'> 
                   Log Out   
