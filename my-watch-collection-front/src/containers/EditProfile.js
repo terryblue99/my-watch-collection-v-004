@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import NavBar from './NavBar'
 import { editProfileAction } from '../actions/currentUserActions'
 import { deleteUserAction } from '../actions/currentUserActions'
@@ -8,53 +8,64 @@ import { trackPromise } from 'react-promise-tracker' // Tracks deleteUserAction,
 import ProcessingIndicator from '../components/ProcessingIndicator' // https://www.basefactor.com/react-how-to-display-a-loading-indicator-on-fetch-calls
 import RedirectTo from '../components/RedirectTo'
 
-class EditProfile extends Component {
+const EditProfile = () => {
      
-     state = {
-    
-          id: this.props.currentUser.user.id,  
-          email: this.props.currentUser.user.email,
+     const currentUser = useSelector(state => state.currentUser)
+     const [stateData, setStateData] = useState({
+          id: currentUser.user.id,  
+          email: currentUser.user.email,
           password: '',
           password_confirmation: '',
 
           isBackToDashboard: false,
           isFormInput: false,
           isProcessing: false
-     }
+     })
+     const dispatch = useDispatch()
 
-     handleDelete = () => {
-          if (window.confirm('Do you really want to delete your account?\nAll of your watches will also be deleted!')) {
-               this.setState({
-                    isProcessing: true
-               })
-               trackPromise (
-                    this.props.deleteUserAction(this.props.currentUser.user.id)  
-               )             
-          }
-      }
-
-     handleChange = (event) => {
-          if(event.target.name === 'password' && event.target.value === '')
-               {this.setState({
-                    isFormInput: false
-               })} 
-          else  {this.setState({
-                    [event.target.name]: event.target.value,
-                    isFormInput: true
-               })}                            
-     }
-
-     handleSubmit = (event) => {
-        event.preventDefault() 
-
-        const {
+     const {
           id,
           email,
           password,
           password_confirmation
-        } = this.state
+     } = stateData
+
+     const handleDelete = () => {
+          if (window.confirm('Do you really want to delete your account?\nAll of your watches will also be deleted!')) {
+               setStateData(prevStateData => {
+                    return {
+                         ...prevStateData,
+                         isProcessing: true
+                    }
+               })
+               trackPromise (
+                    dispatch(deleteUserAction(stateData.id))
+               )             
+          }
+      }
+
+     const handleChange = (event) => {
+          const {name, value} = event.target
+          if(event.target.name === 'password' && event.target.value === '')
+               setStateData(prevStateData => {
+                    return {
+                         ...prevStateData,
+                         isFormInput: false
+                    }
+               })
+          else setStateData(prevStateData => {
+               return {
+                    ...prevStateData,
+                    [name]: value,
+                    isFormInput: true
+               }
+          })                           
+     }
+
+     const handleSubmit = (event) => {
+          event.preventDefault()
           
-          if (this.state.isFormInput) {
+          if (stateData.isFormInput) {
 
                if (password && password.length < 8 ) {
                     alert('Password must be a minimum of 8 characters!')
@@ -72,7 +83,7 @@ class EditProfile extends Component {
                     formData.append('email', email)
                     formData.append('password', password)
                     formData.append('password_confirmation', password_confirmation)
-                    this.props.editProfileAction(formData, id)
+                    dispatch(editProfileAction(formData, id))
                     alert('Your profile has been updated.\nYou will need to log in again.')
                     window.location.assign('/login')
                }    
@@ -81,86 +92,80 @@ class EditProfile extends Component {
           }  
      }
 
-
-     handleBack = () => {
-          this.setState({
-               isBackToDashboard: true
+     const handleBack = () => {
+          setStateData(prevStateData => {
+               return {
+                    ...prevStateData,
+                    isBackToDashboard: true
+               }
           })
      }
-
-     render() {
      
-          if (this.state.isBackToDashboard) {
-               this.setState({
+     if (stateData.isBackToDashboard) {
+          setStateData(prevStateData => {
+               return {
+                    ...prevStateData,
                     isBackToDashboard: false
-               }) 
-               return RedirectTo('/dashboard')
-          }
-
-          const user = this.props.currentUser.user
-      
-          return (  
-              
-               <div>
-                    <NavBar />
-                    <div className='container Profile-container'>
-                         <div className='Profile-form-container'>
-                              <button onClick={this.handleBack} className='btn Back-button Button-text'>Back to dashboard</button>   
-                              <form id='EditProfile-Form'
-                                    onSubmit={this.handleSubmit}
-                              >
-                                   <h1 className='ProfileForm-header Dark-red-color Center-text'>
-                                        Edit Profile
-                                   </h1>
-                                   <h2 className='ProfileForm-subheader Center-text'>
-                                        (You can change your email and/or password here)
-                                   </h2>
-                                   <div className='Profile'>
-                                        <label>Email</label>
-                                        <input className='Input-element'
-                                               type='email'
-                                               name='email'
-                                               defaultValue={user.email}
-                                               onChange={this.handleChange}
-                                        />
-                                        <br /> 
-                                        <label>New Password (<span className='ProfileForm-NewPassword-text Dark-red-color'>Leave blank for no change</span>)</label>
-                                        <input className='Input-element' 
-                                               type='password'
-                                               name='password'
-                                               onChange={this.handleChange}
-                                        />
-                                        <br />
-                                        <label>New Password Confirmation</label>
-                                        <input className='Input-element' 
-                                               type='password'
-                                               name='password_confirmation'
-                                               onChange={this.handleChange}
-                                        />
-                                        <br />
-                                        <button className='btn ProfileUpdate-button Button-text' type='submit'>Update Profile</button>
-                                        <br />
-                                        <br />
-                                   </div>
-                              </form>
-                         </div>
-                         <hr className='ProfileDelete-hr' />
-                         <div className='ProfileDelete'> 
-                              {this.state.isProcessing ? <ProcessingIndicator /> :
-                                   <button className='btn ProfileDelete-button Button-text' onClick={this.handleDelete}> 
-                                        Delete My Account
-                                   </button>}
-                         </div>
+               }
+          })
+          return RedirectTo('/dashboard')
+     }
+     
+     return (  
+          
+          <div>
+               <NavBar />
+               <div className='container Profile-container'>
+                    <div className='Profile-form-container'>
+                         <button onClick={handleBack} className='btn Back-button Button-text'>Back to dashboard</button>   
+                         <form id='EditProfile-Form'
+                                   onSubmit={handleSubmit}
+                         >
+                              <h1 className='ProfileForm-header Dark-red-color Center-text'>
+                                   Edit Profile
+                              </h1>
+                              <h2 className='ProfileForm-subheader Center-text'>
+                                   (You can change your email and/or password here)
+                              </h2>
+                              <div className='Profile'>
+                                   <label>Email</label>
+                                   <input className='Input-element'
+                                             type='email'
+                                             name='email'
+                                             defaultValue={email}
+                                             onChange={handleChange}
+                                   />
+                                   <br /> 
+                                   <label>New Password (<span className='ProfileForm-NewPassword-text Dark-red-color'>Leave blank for no change</span>)</label>
+                                   <input className='Input-element' 
+                                             type='password'
+                                             name='password'
+                                             onChange={handleChange}
+                                   />
+                                   <br />
+                                   <label>New Password Confirmation</label>
+                                   <input className='Input-element' 
+                                             type='password'
+                                             name='password_confirmation'
+                                             onChange={handleChange}
+                                   />
+                                   <br />
+                                   <button className='btn ProfileUpdate-button Button-text' type='submit'>Update Profile</button>
+                                   <br />
+                                   <br />
+                              </div>
+                         </form>
+                    </div>
+                    <hr className='ProfileDelete-hr' />
+                    <div className='ProfileDelete'> 
+                         {stateData.isProcessing ? <ProcessingIndicator /> :
+                              <button className='btn ProfileDelete-button Button-text' onClick={handleDelete}> 
+                                   Delete My Account
+                              </button>}
                     </div>
                </div>
-          )
-     } 
+          </div>
+     )
 }
 
-const mapStateToProps = (state) => { 
-  return {
-    currentUser: state.currentUser
-  } 
-}
-
-export default connect(mapStateToProps, { editProfileAction, deleteUserAction })(EditProfile)
+export default EditProfile
