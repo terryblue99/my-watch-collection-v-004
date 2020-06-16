@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import { getWatchesAction } from '../actions/watchesActions'
 import NavBar from './NavBar'
 import Watches from '../components/Watches'
 
 const DashBoard = (props) => {
     
+    const location = useLocation()
+
     const currentUser = useSelector(state => state.currentUser)
     const watches = useSelector(state => state.myWatches.watches)
     const watchRelated = useSelector(state => state.myWatches.watchRelated)
@@ -17,34 +20,29 @@ const DashBoard = (props) => {
         }   
     },[currentUser, dispatch, props.location.state])
 
-    let sortOptionSelected = 'Select a sort option...'
     let isSearchSuccessful
 
     // Check if redirected from another screen
     if (props.location.state) {
-
+        alert('location.state: ' + props.location.state.isFromWatchDetail)
         // Check if redirected to from a NavBar search
-        if (props.location.state.isFromNavBar) {
-                if (props.location.state.isSearchSuccessful) {
-                    isSearchSuccessful = props.location.state.isSearchSuccessful
-                } else if (props.location.state.isSearchFailed) {
-                    dispatch(getWatchesAction(currentUser.user.id, props.location.state.isSearchFailed))
+        if (location.state.isFromNavBar) {
+            alert('location.state NavBar')
+                if (location.state.isSearchSuccessful) {
+                    isSearchSuccessful = location.state.isSearchSuccessful
+                } else if (location.state.isSearchFailed) {
+                    dispatch(getWatchesAction(currentUser.user.id, location.state.isSearchFailed))
                 }
             }
 
         // Check if redirected to from WatchDetail and a record has been deleted
-        else if (props.location.state.isFromWatchDetail &&
-                    props.location.state.isWatchDeleted) {
+        else if (location.state.isFromWatchDetail &&
+                    location.state.isWatchDeleted) {
+                        alert('redirected to from WatchDetail and a record has been deleted')
                     dispatch(getWatchesAction(props.currentUser.user.id))
                     // Delete the history location state to prevent re-execution of this code
-                    delete props.history.location.state
+                    delete location.state
                     
-                }
-
-        // Check if redirected to from DashboardMain and a sort has been selected
-        else if (props.location.state.isFromDashboardMain &&
-                    props.location.state.sortOptionSelected) {
-                    sortOptionSelected = props.location.state.sortOptionSelected
                 }
     }
 
@@ -55,7 +53,6 @@ const DashBoard = (props) => {
             <div className='container Main-container'> 
                 <Watches watches={watches}
                          watchRelated={watchRelated}
-                         sortOptionSelected={sortOptionSelected}
                          isSearchSuccessful={isSearchSuccessful}
                          DashBoardSortHistory={props.history}
                 />               
