@@ -15,8 +15,8 @@ const DashboardMain = (props) => {
 
   const handleSelectedSortKey = (event) =>  {
     event.preventDefault()
-    dispatch(sortWatchesAction(event.target.value))
     const {value} = event.target
+    dispatch(sortWatchesAction(value))
     setStateData(prevStateData => {
       return {
         ...prevStateData,
@@ -50,7 +50,7 @@ const DashboardMain = (props) => {
               size='1' 
               name='sort' 
               onChange={handleSelectedSortKey}>
-        <option>{stateData.sortOptionSelected}</option>
+        <option>{props.sortOptionSelected}</option>
         <option value='Watch Maker'>Watch Maker</option>
         <option value='Watch Name'>Watch Name</option>
         <option value='Newest to Oldest'>Newest to Oldest</option>
