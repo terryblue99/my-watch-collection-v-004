@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch} from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { hashHistory } from 'react-router' // Used to change URL without a re-render
 import logo from '../images/logo.jpg'
 import { sortWatchesAction, resetWatchesAction, resetSearchFailedAction, resetSortAction } from '../actions/watchesActions'
@@ -7,7 +8,9 @@ import RedirectToWithState from "../components/RedirectToWithState"
 
 const DashboardMain = (props) => {
 
-  const [stateData, setStateData] = useState({isSortRequired: false, sortOptionSelected: ''})
+  const history = useHistory()
+
+  const [stateData, setStateData] = useState({isSortRequired: false, sortOptionSelected: 'Select a sort option...'})
   const savedWatches = useSelector(state => state.myWatches.savedWatches)
   const watchRelated = useSelector(state => state.myWatches.watchRelated) // For records that are not related to a specific watch.
   const isSearchFailed = useSelector(state => state.myWatches.isSearchFailed)
@@ -24,6 +27,24 @@ const DashboardMain = (props) => {
         sortOptionSelected: value
       }
     })
+  }
+
+  const handleSortOption = () => {
+    setStateData(prevStateData => {
+      return {
+        ...prevStateData,
+        sortOptionSelected: 'Select a sort option...'
+      }
+    })
+  }
+
+  const clearHistory = () => {
+    if (history.location && history.location.state && history.location.state.from) {
+      alert('yippee!')
+      const state = { ...history.location.state }
+      delete state.from
+      history.replace({ ...history.location, state })
+    }
   }
 
   let a_newest_watch_exists
@@ -50,7 +71,7 @@ const DashboardMain = (props) => {
               size='1' 
               name='sort' 
               onChange={handleSelectedSortKey}>
-        <option>{props.sortOptionSelected}</option>
+        <option>{stateData.sortOptionSelected}</option>
         <option value='Watch Maker'>Watch Maker</option>
         <option value='Watch Name'>Watch Name</option>
         <option value='Newest to Oldest'>Newest to Oldest</option>
@@ -99,8 +120,7 @@ const DashboardMain = (props) => {
       return  RedirectToWithState(
                                     '/dashboard',
                                     {
-                                      isFromDashboardMain: true,
-                                      sortOptionSelected: stateData.sortOptionSelected
+                                      isFromDashboardMain: true
                                     } 
                                   )
   }
@@ -125,10 +145,9 @@ const DashboardMain = (props) => {
                 // so that the initial sort option text can be displayed
                 onClick={() => {  dispatch(resetWatchesAction())
                                   props.setCurrentWatch(false)
-                                  if (props.DashBoardSortHistory.location.state) {
-                                      delete props.DashBoardSortHistory.location.state 
-                                  }  
-                                } 
+                                  handleSortOption()
+                                  delete history.location.state
+                }               
               }> 
                 Redisplay Initial List
               </button>
