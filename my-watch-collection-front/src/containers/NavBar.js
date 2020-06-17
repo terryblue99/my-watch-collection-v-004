@@ -45,6 +45,7 @@ const NavBar = () => {
       // Clear the form
       ClearForm('Nav-search-form')
       // Display list from the search on the dashboard
+      alert('*** NavBar - Redirect with state')
       return  RedirectToWithState(
                                     '/dashboard',
                                     {

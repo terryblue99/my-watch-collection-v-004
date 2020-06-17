@@ -64,8 +64,7 @@ const WatchDetail = (props) => {
         })
         // Clear the current detail screen to allow 
         // the dashboard to be displayed there instead
-        props.setCurrentWatch(null) 
-        alert('going to /dashboard')
+        props.setCurrentWatch(null)
         return  RedirectToWithState(
                                         '/dashboard',
                                         {
@@ -239,7 +238,8 @@ const WatchDetail = (props) => {
                                 setCurrentWatch={props.setCurrentWatch}
                                 filteredWatches={props.filteredWatches}
                                 filteredWatchRelated={props.filteredWatchRelated}
-                                DashBoardSortHistory={props.DashBoardSortHistory}              
+                                sortOptionSelected={props.sortOptionSelected}
+                                DashBoardHistory={props.DashBoardHistory}              
         />
     }
 }

@@ -1,11 +1,11 @@
-import React from 'react'
-import { Redirect } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const RedirectToWithState = (path, state) => {
-  return  <Redirect to={{
+      const history = useHistory()
+      history.push({
             pathname: path,
             state: state
-      }}  />
+      })
 }
 
 export default RedirectToWithState
