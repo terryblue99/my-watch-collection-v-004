@@ -102,7 +102,7 @@ const EditProfile = () => {
      }
      
      if (stateData.isBackToDashboard) {
-          return RedirectTo('/dashboard')
+          RedirectTo('/dashboard')
      }
      
      return (  

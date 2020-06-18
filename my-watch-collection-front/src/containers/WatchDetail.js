@@ -83,7 +83,7 @@ const WatchDetail = (props) => {
         // Clear the current detail screen to allow 
         // the dashboard to be displayed there instead
         props.setCurrentWatch(null) 
-        return  RedirectTo('/dashboard')
+        RedirectTo('/dashboard')
     }
 
     const {currentWatch} = props

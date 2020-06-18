@@ -103,7 +103,7 @@ const AddWatch = (props) => {
      }     
 
      if (backToDashboard.isBackToDashboard) { 
-          return RedirectTo('/dashboard')
+          RedirectTo('/dashboard')
      }
 
      const isAddWatchRelated = props.location.isAddWatchRelated || false

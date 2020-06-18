@@ -55,6 +55,7 @@ export const sortWatchesAction = (sortKey) => {
 }
 
 export const searchWatchesAction = (searchText) => {
+	alert('searchWatchesAction searchText: ' + searchText)
 	return dispatch => {
 		dispatch({
 			type: RESET_WATCHES

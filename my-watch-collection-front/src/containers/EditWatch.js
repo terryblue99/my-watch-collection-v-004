@@ -131,7 +131,7 @@ class EditWatch extends React.Component {
                     this.setState({
                          isBackToDashboard: false
                     }) 
-                    return RedirectTo('/dashboard')
+                    RedirectTo('/dashboard')
           }
 
           const watch = this.props.location.state.watch

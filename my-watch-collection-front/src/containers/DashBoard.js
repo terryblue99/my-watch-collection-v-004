@@ -28,6 +28,8 @@ const DashBoard = (props) => {
                         isSearchSuccessful = props.location.state.isSearchSuccessful
                 } else if (props.location.state.isSearchFailed) {
                     dispatch(getWatchesAction(currentUser.user.id, props.location.state.isSearchFailed))
+                    // Delete the history location state to prevent re-execution of this code
+                    delete props.history.location.state
                 }
             }
 
