@@ -15,7 +15,7 @@ import AddWatch from './AddWatch'
 import WatchDetail from './WatchDetail'
 import EditWatch from './EditWatch'
 import EditProfile from './EditProfile'
-import RedirectTo from '../components/RedirectTo'
+import { Redirect } from 'react-router-dom'
 
 const App = () => {
 
@@ -29,13 +29,19 @@ const App = () => {
     is_logged_in = user.logged_in
   }
 
+  const handleRedirect = () => {
+    return  <Redirect to={{
+      pathname: '/home'
+    }}  />
+  }
+
   const PrivateRoute = ({ component: Component, ...rest}) => ( // rename component with a capital 'C'
                                                                 // ...rest is rest of arguments; path & component
     <div> 
       <Route {...rest} render={(props) => (
         a_user_exists && is_logged_in
         ? <Component {...props} /> 
-        : RedirectTo('/home')
+        : handleRedirect()
       )}/>
     </div> 
   )

@@ -27,7 +27,7 @@ const LogIn = (props) => {
     }
         
     if (currentUser?.logged_in) {
-        return RedirectTo('/dashboard')
+        RedirectTo('/dashboard')
     }
 
     let isFromSignUp

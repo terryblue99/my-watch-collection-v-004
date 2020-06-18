@@ -1,10 +1,10 @@
-import React from 'react'
-import { Redirect } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const RedirectTo = (path) => {
-  return  <Redirect to={{
+      const history = useHistory()
+      history.push({
             pathname: path
-      }}  />
+      })
 }
 
 export default RedirectTo

@@ -5,7 +5,7 @@ import logo from '../../images/logo.jpg'
 import { signUpAction } from "../../actions/currentUserActions.js"
 import ClearForm from "../../components/ClearForm"
 import SetFocus from "../../components/SetFocus"
-import RedirectToWithState from '../../components/RedirectToWithState'
+import { Redirect } from 'react-router-dom'
 
 const SignUp = () => {
 
@@ -44,10 +44,10 @@ const SignUp = () => {
     }
        
     if (currentUser) {
-        return RedirectToWithState(
-                                    '/login',
-                                    {isFromSignUp: true}
-                                    )    
+        return  <Redirect to={{
+            pathname: '/login',
+            state: {isFromSignUp: true}
+        }}  />
     }
 
     return (
