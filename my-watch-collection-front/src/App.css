@@ -466,7 +466,7 @@ img {
 }
 
 button:focus,
-.Select-sort
+#Select-sort
 {
   outline: 0;
 }
@@ -896,7 +896,7 @@ textarea:required
     margin-top: 20px;
   }
 
-  .Select-sort {
+  #Select-sort {
     min-width: 222px;
   }
 
@@ -1090,7 +1090,7 @@ textarea:required
     margin-top: 15px;
   }
 
-  .Select-sort {
+  #Select-sort {
     min-width: 220px;
   }
 

@@ -10,6 +10,7 @@ const DashboardMain = (props) => {
   const [stateData, setStateData] = useState({isSortRequired: false, sortOptionSelected: ''})
   const savedWatches = useSelector(state => state.myWatches.savedWatches)
   const watchRelated = useSelector(state => state.myWatches.watchRelated) // For records that are not related to a specific watch.
+  const sortDefaultText = useSelector(state => state.myWatches.sortDefaultText)
   const isSearchFailed = useSelector(state => state.myWatches.isSearchFailed)
   const dispatch = useDispatch()
 
@@ -40,13 +41,12 @@ const DashboardMain = (props) => {
   let number_of_watcheRelated = 0
 
   const number_of_saved_watches = Object.keys(savedWatches).length
-
   const sortElement = [
     <>
       <h2 className='Center-text'>Sort By</h2>
       <br />
-      <select className='Select-sort'
-              required 
+      <select id='Select-sort'
+              required
               size='1' 
               name='sort' 
               onChange={handleSelectedSortKey}>
@@ -60,6 +60,14 @@ const DashboardMain = (props) => {
       </select>
     </>
   ]
+
+  let dropDown
+  if (props.sortOptionSelected && props.sortOptionSelected === sortDefaultText ) {
+      if (document.getElementById('Select-sort') !== null) {
+            dropDown = document.getElementById('Select-sort')
+            dropDown.options[0].selected = true
+      }
+  }
 
   const welcome = [
     <>
@@ -124,13 +132,9 @@ const DashboardMain = (props) => {
                 // Fetch all records and delete the DashBoard history location state
                 // so that the initial sort option text can be displayed
                 onClick={() => {  dispatch(resetWatchesAction())
-                                  props.setCurrentWatch(false)
-                                  if (props.DashBoardHistory) {
-                                        if (props.DashBoardHistory.location.state) {
-                                          alert('$$$ props.DashBoardHistory.location.state: ' + JSON.stringify(props.DashBoardHistory.location.state))
-                                        delete props.DashBoardHistory.location.state 
-                                    } 
-                                  }
+                                  if (props.DashBoardHistory && props.DashBoardHistory.location.state) {
+                                        delete props.DashBoardHistory.location.state                                                                               
+                                  }             
                 }               
               }> 
                 Redisplay Initial List

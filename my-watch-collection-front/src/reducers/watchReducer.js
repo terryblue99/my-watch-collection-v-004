@@ -20,6 +20,7 @@ const initialState = {
 	isSearchFailed: false,
 	isSort: false,
 	savedWatches: [],
+	sortDefaultText: 'Select a sort option...',
 	watchRelated: 'Watch-Related' // For records that are not related to a specific watch.
 }
 let sortedWatches

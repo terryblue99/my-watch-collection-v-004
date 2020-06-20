@@ -5,10 +5,11 @@ import NavBar from './NavBar'
 import Watches from '../components/Watches'
 
 const DashBoard = (props) => {
-    
+
     const currentUser = useSelector(state => state.currentUser)
     const watches = useSelector(state => state.myWatches.watches)
     const watchRelated = useSelector(state => state.myWatches.watchRelated)
+    const sortDefaultText = useSelector(state => state.myWatches.sortDefaultText)
     const dispatch = useDispatch()
 
     useEffect(() => {  
@@ -17,7 +18,7 @@ const DashBoard = (props) => {
         }   
     },[currentUser, dispatch, props.location.state])
 
-    let sortOptionSelected = 'Select a sort option...'
+    let sortOptionSelected = sortDefaultText
     let isSearchSuccessful
 
     // Check if redirected from another screen
@@ -47,12 +48,12 @@ const DashBoard = (props) => {
                     sortOptionSelected = props.location.state.sortOptionSelected
                 }
     }
-
+    
     return (
 
         <div>
             <NavBar />
-            <div className='container Main-container'> 
+            <div className='container Main-container'>
                 <Watches watches={watches}
                          watchRelated={watchRelated}
                          sortOptionSelected={sortOptionSelected}
