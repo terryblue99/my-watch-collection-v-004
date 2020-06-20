@@ -61,11 +61,11 @@ const DashboardMain = (props) => {
     </>
   ]
 
-  let dropDown
+
   if (props.sortOptionSelected && props.sortOptionSelected === sortDefaultText ) {
       if (document.getElementById('Select-sort') !== null) {
-            dropDown = document.getElementById('Select-sort')
-            dropDown.options[0].selected = true
+            // Reset sort option to the default
+            document.getElementById('Select-sort').options[0].selected = true
       }
   }
 
