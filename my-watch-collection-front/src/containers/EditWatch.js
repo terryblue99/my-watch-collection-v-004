@@ -181,7 +181,7 @@ const EditWatch = (props) => {
                               :    <> <input className='Input-element Dark-red-color'
                                              type='text'
                                              name='watch_maker'
-                                             value={this.props.watchRelated}/>
+                                             value={stateData.watch_maker}/>
                                    </>
                          }
                          <br />
