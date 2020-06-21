@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 const WatchRelatedInfo = ()  => {
 
   let history = useHistory()
-  // alert('history: ' + JSON.stringify(history))
+  
   const handleBack = () => {
     history.push('/dashboard')
   }
