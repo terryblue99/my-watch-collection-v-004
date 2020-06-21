@@ -13,7 +13,7 @@ const AddWatch = (props) => {
      const watchRelated = useSelector(state => state.myWatches.watchRelated) // For records that are not related to a specific watch.
      const dispatch = useDispatch()
 
-     const initialWatchState = {
+     const initialState = {
           watch_maker: watchRelated,
           watch_name: '',
           movement: '',
@@ -30,7 +30,7 @@ const AddWatch = (props) => {
      }
           
      const [backToDashboard, setBackToDashboard] = useState({isBackToDashboard: false})
-     const [stateData, setStateData] = useState(initialWatchState)
+     const [stateData, setStateData] = useState(initialState)
 
      const handleChange = (event) => {
           const {name, value} = event.target
