@@ -73,7 +73,7 @@ const DashboardMain = (props) => {
     <>
       <h2 className="Welcome-text-header Center-text">Welcome</h2>
       <p className="Welcome-text Center-text"><b>Please click on the ADD WATCH button</b></p>
-      <p className="Welcome-text Center-text"><b>to start cataloguing your watches</b></p>
+      <p className="Welcome-text Center-text"><b>to start cataloging your watches</b></p>
     </>
   ]
 
