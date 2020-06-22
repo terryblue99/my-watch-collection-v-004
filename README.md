@@ -4,7 +4,7 @@ APP
 
 my-watch-collection-v-004
 
-Catalog a watch collection - (React Hooks/Rails API version) (MySQL DB)
+Catalog a watch collection - (React/Redux/Hooks & Rails API version) (MySQL DB)
 
 INSTALLATION, USAGE & DEVELOPMENT
 
