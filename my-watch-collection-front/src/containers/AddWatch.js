@@ -78,7 +78,8 @@ const AddWatch = (props) => {
           formData.append('water_resistance', stateData.water_resistance)
           formData.append('complications', stateData.complications)
           formData.append('date_bought', stateData.date_bought)
-          formData.append('cost', stateData.notes)
+          formData.append('cost', stateData.cost)
+          formData.append('notes', stateData.notes)
           formData.append('user_id', stateData.user_id)
           if (stateData.image) {
                formData.append('image', stateData.image)
