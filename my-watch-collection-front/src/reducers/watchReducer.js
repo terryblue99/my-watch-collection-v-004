@@ -95,39 +95,9 @@ export default (state = initialState, { type, payload } ) => {
 			let searchArray
 			const searchText = payload.toLowerCase()
 
-			// Convert null values to spaces before search
 			return ({
 				...state,
-				watches: state.watches.map(watch => {
-					if (!watch.movement) {
-						watch.movement = ' '
-					}
-					if (!watch.complications) {
-						watch.complications = ' '
-					}
-					if (!watch.band) {
-						watch.band = ' '
-					}
-					if (!watch.model_number) {
-						watch.model_number = ' '
-					}
-					if (!watch.case_measurement) {
-						watch.case_measurement = ' '
-					}
-					if (!watch.water_resistance) {
-						watch.water_resistance = ' '
-					}
-					if (!watch.date_bought) {
-						watch.date_bought = ' '
-					}
-					if (!watch.cost) {
-						watch.cost = '0'
-					}
-					if (!watch.notes) {
-						watch.notes = ' '
-					}
-					return watch
-				}).filter(watch => {
+				watches: state.watches.filter(watch => {
 					searchArray = []
 					searchArray.push( watch.watch_name.toLowerCase(),
 														watch.watch_maker.toLowerCase(),
