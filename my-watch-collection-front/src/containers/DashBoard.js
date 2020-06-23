@@ -11,15 +11,12 @@ const DashBoard = (props) => {
     const watchRelated = useSelector(state => state.myWatches.watchRelated)
     const sortDefaultText = useSelector(state => state.myWatches.sortDefaultText)
     const dispatch = useDispatch()
-
-    useEffect(() => {  
-        if (!props.location.state || props.location.state.isEdits) {
-            dispatch(getWatchesAction(currentUser.user.id)) 
-        }   
-    },[currentUser, dispatch, props.location.state])
-
     let sortOptionSelected = sortDefaultText
     let isSearchSuccessful
+    
+    useEffect(() => {
+        dispatch(getWatchesAction(currentUser.user.id))    
+    },[dispatch, currentUser.user.id])
 
     // Check if redirected from another screen
     if (props.location.state) {
@@ -34,19 +31,27 @@ const DashBoard = (props) => {
                 }
             }
 
+        // Check if redirected to from WatchDetail and a record has been edited
+        else if (props.location.state.isFromWatchDetail &&
+                    props.location.state.isEdits) {
+                    dispatch(getWatchesAction(currentUser.user.id))
+                    // Delete the history location state to prevent re-execution of this code
+                    delete props.history.location.state   
+                }
+
         // Check if redirected to from WatchDetail and a record has been deleted
         else if (props.location.state.isFromWatchDetail &&
                     props.location.state.isWatchDeleted) {
                     dispatch(getWatchesAction(currentUser.user.id))
                     // Delete the history location state to prevent re-execution of this code
                     delete props.history.location.state   
-                }
+        }
 
-        // Check if redirected to from DashboardMain and a sort has been selected
-        else if (props.location.state.isFromDashboardMain &&
+         // Check if redirected to from DashboardMain and a sort has been selected
+         else if (props.location.state.isFromDashboardMain &&
                     props.location.state.sortOptionSelected) {
                     sortOptionSelected = props.location.state.sortOptionSelected
-                }
+        }
     }
     
     return (
