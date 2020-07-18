@@ -1,6 +1,5 @@
 import _ from 'lodash'
-import { 
-	ADD_WATCH, 
+import {
 	CLEAR_WATCHES,
 	COST_HIGH_TO_LOW_SORT,
 	COST_LOW_TO_HIGH_SORT,
@@ -61,14 +60,6 @@ export default (state = initialState, { type, payload } ) => {
 				...state,
 				isSearchFailed: payload
 			})
-
-		case ADD_WATCH:
-			if (payload) {
-				return ({
-					...state,
-					state: state.watches.concat(payload)
-				}) 	
-			} else return state
 
 		case DELETE_WATCH:
 			if (payload) {

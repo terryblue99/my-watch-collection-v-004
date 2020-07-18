@@ -1,6 +1,5 @@
 import {
 	GET_WATCHES,
-	ADD_WATCH,
 	DELETE_WATCH,
 	SEARCH_WATCHES,
 	RESET_SORT,
@@ -92,7 +91,7 @@ export const resetSearchFailedAction = (isSearchFailed = false) => {
 	}		
 }
 
-export const addWatchAction = (formData, watch) => {
+export const addWatchAction = (formData) => {
 	return dispatch => {
 		return fetch(`${API_URL}/watches`, {
 			method: 'POST',
@@ -101,12 +100,7 @@ export const addWatchAction = (formData, watch) => {
 		.then(response => {
 			if (response.error) {
 				alert('*** addWatchAction ERROR 1: ' + response.error.message)
-			} else {
-					dispatch({
-							type: ADD_WATCH,
-							payload: watch
-					})
-				}
+			}
 		})
 		.catch(error => {
 			console.log('*** addWatchAction ERROR 2: ' + error.message)

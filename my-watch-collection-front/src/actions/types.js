@@ -2,7 +2,6 @@ export const SET_CURRENT_USER = 'SET_CURRENT_USER'
 export const CLEAR_CURRENT_USER = 'CLEAR_CURRENT_USER'
 export const DELETE_USER = 'DELETE_USER'
 
-export const ADD_WATCH = 'ADD_WATCH'
 export const GET_WATCHES = 'GET_WATCHES'
 export const SEARCH_WATCHES = 'SEARCH_WATCHES'
 export const RESET_WATCHES = 'RESET_WATCHES'

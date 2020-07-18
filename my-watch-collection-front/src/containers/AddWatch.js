@@ -84,7 +84,7 @@ const AddWatch = (props) => {
           if (stateData.image) {
                formData.append('image', stateData.image)
           }
-          dispatch(addWatchAction(formData, stateData.watchData))
+          dispatch(addWatchAction(formData))
           if (!isWatchRelated) {
                alert('The watch has been added and saved!')
           } else alert(`The ${watchRelated} has been added and saved!`)
