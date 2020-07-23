@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import Image from 'react-image-enlarger'
 import { deleteWatchAction } from '../actions/watchesActions'
 import DashboardMain from './DashboardMain'
 import RedirectTo from '../components/RedirectTo'
@@ -9,10 +10,24 @@ import RedirectToWithState from '../components/RedirectToWithState'
 const WatchDetail = (props) => { 
 
     const [stateData, setStateData] = useState({isBackToDashboard: false, isWatchDeleted: false})
+    const [zoomed, setZoomed] = React.useState(false)
     const isSort = useSelector(state => state.myWatches.isSort)
     const watchRelated = useSelector(state => state.myWatches.watchRelated) // For records that are not related to a specific watch.
     const isSearchFailed = useSelector(state => state.myWatches.isSearchFailed)
     const dispatch = useDispatch()
+
+    const enlargeImage = (image) => {
+        return (
+            <Image className='Watch-image'
+                style={{ width: '200px', height: 'auto' }}
+                zoomed={zoomed}
+                src={image}
+                alt='enlarged comic image'
+                onClick={() => setZoomed(true)}
+                onRequestClose={() => setZoomed(false)}
+            />
+        )
+    }
 
     const handleDelete = () => {
 
@@ -114,7 +129,7 @@ const WatchDetail = (props) => {
                 <div className='Back-button_and_Image'>    
                     <button onClick={handleBack} className='Watch-detail-back-button btn Button-text'>Back to dashboard</button>
                     <div className='Watch-detail-image'> 
-                        <img src={currentWatch.image} alt='current watch' className='Watch-image'/>
+                        {enlargeImage(currentWatch.image)}
                     </div>
                 </div>
                 <div className='Watch-detail-text'>
