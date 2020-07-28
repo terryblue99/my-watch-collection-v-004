@@ -178,8 +178,8 @@ const EditWatch = (props) => {
                                              defaultValue={watch.watch_maker}
                                              onChange={handleChange}/>
                                    </>
-                              :    <> <input className='Input-element Dark-red-color'
-                                             type='text'
+                              :    <> <input className='Input-element'
+                                             type='hidden'
                                              name='watch_maker'
                                              value={stateData.watch_maker}/>
                                    </>

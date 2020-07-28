@@ -136,9 +136,8 @@ const AddWatch = (props) => {
                                              name='watch_maker'
                                              onChange={handleChange}/>
                                    </>
-                              :    <> <input className='Input-element Dark-red-color'
-                                             autoComplete='off'
-                                             type='text'
+                              :    <> <input className='Input-element'
+                                             type='hidden'
                                              name='watch_maker'
                                              value={watchRelated}
                                              readonly/>

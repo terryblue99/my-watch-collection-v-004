@@ -35,8 +35,7 @@ const WatchRelatedInfo = ()  => {
           <li>Click the <span className='Blue-color'>SAVE</span> button to save the record</li>
         </ol>
         < br/>
-        <p><span className='WatchRelated-note'>Note:</span> The <span className='Dark-red-color'>Watch-Related</span> field is fixed and uneditable. It will be used</p>
-        <p className='WatchRelated-info-tab'>to recognize and select Watch-Related records to be processed accordingly. Include words you may want to search on in those records.</p>
+        <p><span className='WatchRelated-note'>Note:</span> Include words you may want to search on in these records.</p>
         < br/>
         <button onClick={handleBack} className='btn Button-text'>Back to dashboard</button>
       </div>
