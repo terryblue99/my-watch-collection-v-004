@@ -211,7 +211,7 @@ const WatchDetail = (props) => {
                         {notes 
                         ?    <>
                                 <p className='Detail-css'>Notes</p>
-                                <h3 className='WatchDetail'>{notes}</h3>
+                                <h3 className='TextDetail'>{notes}</h3>
                             </>
                         : null }
                     </div> 
