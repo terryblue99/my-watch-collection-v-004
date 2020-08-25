@@ -7,6 +7,7 @@ import {
 	GET_WATCHES, 
 	NEWEST_TO_OLDEST_SORT,
 	OLDEST_TO_NEWEST_SORT,
+	RESET_TOTAL_COST,
 	RESET_SEARCH_FAILED,
 	RESET_SORT,
 	RESET_WATCHES,
@@ -18,9 +19,12 @@ import {
 const initialState = {
 	isSearchFailed: false,
 	isSort: false,
+	watches: [],
 	savedWatches: [],
 	sortDefaultText: 'Select a sort option...',
-	watchRelated: 'Watch-Related' // For records that are not related to a specific watch.
+	watchRelated: 'Watch-Related', // For records that are not related to a specific watch.
+	totalCost: parseFloat(0),
+	savedTotalCost: parseFloat(0)
 }
 let sortedWatches
 
@@ -53,6 +57,13 @@ export default (state = initialState, { type, payload } ) => {
 			return ({
 				...state,
 				watches: state.savedWatches
+			})
+
+			case RESET_TOTAL_COST:		
+			return ({
+				...state,
+				comics: state.savedWatches,
+				totalCost: parseFloat(0)
 			})
 
 		case RESET_SEARCH_FAILED:
