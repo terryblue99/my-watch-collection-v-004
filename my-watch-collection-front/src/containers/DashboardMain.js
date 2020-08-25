@@ -12,6 +12,7 @@ const DashboardMain = (props) => {
   const watchRelated = useSelector(state => state.myWatches.watchRelated) // For records that are not related to a specific watch.
   const sortDefaultText = useSelector(state => state.myWatches.sortDefaultText)
   const isSearchFailed = useSelector(state => state.myWatches.isSearchFailed)
+  const totalCost = useSelector(state => state.myComics.totalCost)
   const dispatch = useDispatch()
 
   const handleSelectedSortKey = (event) =>  {
@@ -145,6 +146,14 @@ const DashboardMain = (props) => {
         <br />
         { number_of_watches > 0
             ? <p className='Dashboard-totalWatches Center-text'>Total watches: <span className='Watch-total'>{number_of_watches}</span></p>
+            : null
+        }
+        { number_of_watches > 0 && totalCost > 0
+            ?  <p className='Dashboard-totalWatches Center-text'>
+                Total Cost: <span className='Watch-total'>
+                              {parseFloat(totalCost).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}
+                            </span>
+              </p>
             : null
         }
         { number_of_watcheRelated > 0

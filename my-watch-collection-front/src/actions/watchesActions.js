@@ -33,10 +33,15 @@ export const getWatchesAction = (user_id, isSearchFailed = false) => {
 				.sortBy('watch_name')
 				.sortBy('watch_maker')
 				.value()
+			// Accumulate the total cost of all watches
+			const totalCost = response.reduce((total, cost, index, array) => {
+				total += parseFloat(array[index].cost)
+				return total
+			}, 0)
 			// Update watch states with the sorted result
 			dispatch({
 				type: GET_WATCHES, 
-				payload: {sortedWatches, isSearchFailed}
+				payload: {sortedWatches, totalCost, isSearchFailed}
 			})
 		})
 		.catch(error => {
