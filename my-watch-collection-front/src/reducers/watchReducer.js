@@ -49,14 +49,17 @@ export default (state = initialState, { type, payload } ) => {
 					WatchRelated: state.WatchRelated,
 					isSearchFailed: payload.isSearchFailed,
 					savedWatches: payload.sortedWatches,
-					watches: payload.sortedWatches
+					watches: payload.sortedWatches,
+					totalCost: payload.totalCost,
+					savedTotalCost: payload.totalCost
 				})
 			} else return state
 
 		case RESET_WATCHES:		
 			return ({
 				...state,
-				watches: state.savedWatches
+				watches: state.savedWatches,
+				totalCost: state.savedTotalCost
 			})
 
 			case RESET_TOTAL_COST:		
@@ -83,7 +86,10 @@ export default (state = initialState, { type, payload } ) => {
 
 		case CLEAR_WATCHES:
 				state = initialState
-				return state
+				return ({
+					...state,
+					totalCost: parseFloat(0)
+				})
 
 		// SEARCH WATCHES & WATCH-RELATED
 
@@ -91,31 +97,48 @@ export default (state = initialState, { type, payload } ) => {
 
 			if (payload === '') {
 				alert('Please enter a search value!\nIf a selection from available history is not working, you may need to retype it in the search box!')
-				return state
+				return ({
+					...state,
+					comics: state.savedComics,
+					totalCost: state.savedTotalCost
+				})
 			}
 
-			let searchArray
-			const searchText = payload.toLowerCase()
+			let watchArray
+			let searchText
+
+			if (payload !== null) {
+				searchText = payload.toLowerCase()
+			}
+			
+			const searchArray = state.watches.filter(watch => {
+				watchArray = []
+				watchArray.push( watch.watch_name.toLowerCase(),
+													watch.watch_maker.toLowerCase(),
+													watch.movement.toLowerCase(),
+													watch.complications.toLowerCase(),
+													watch.band.toLowerCase(),
+													watch.model_number.toLowerCase(),
+													watch.case_measurement.toLowerCase(),
+													watch.water_resistance.toLowerCase(),
+													watch.date_bought.toLowerCase(),
+													watch.cost,
+													watch.notes.toLowerCase()
+												)
+				// check array of record string fields for searchText string/substring
+				return watchArray.some(watchStringField => watchStringField.includes(searchText))
+			})
+			
+			// Accumulate the total cost of all watches
+			const totalCost = searchArray.reduce((total, cost, index, array) => {
+				total += parseFloat(array[index].cost)
+				return total
+			}, 0)
 
 			return ({
 				...state,
-				watches: state.watches.filter(watch => {
-					searchArray = []
-					searchArray.push( watch.watch_name.toLowerCase(),
-														watch.watch_maker.toLowerCase(),
-														watch.movement.toLowerCase(),
-														watch.complications.toLowerCase(),
-														watch.band.toLowerCase(),
-														watch.model_number.toLowerCase(),
-														watch.case_measurement.toLowerCase(),
-														watch.water_resistance.toLowerCase(),
-														watch.date_bought.toLowerCase(),
-														watch.cost,
-														watch.notes.toLowerCase()
-													)
-					// check array of record string fields for searchText string/substring
-					return searchArray.some(watchStringField => watchStringField.includes(searchText))
-				})
+				watches: searchArray,
+				totalCost: totalCost
 			})
 		
 		// SORT WATCHES & WATCH-RELATED
