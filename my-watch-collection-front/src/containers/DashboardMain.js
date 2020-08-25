@@ -12,7 +12,7 @@ const DashboardMain = (props) => {
   const watchRelated = useSelector(state => state.myWatches.watchRelated) // For records that are not related to a specific watch.
   const sortDefaultText = useSelector(state => state.myWatches.sortDefaultText)
   const isSearchFailed = useSelector(state => state.myWatches.isSearchFailed)
-  const totalCost = useSelector(state => state.myComics.totalCost)
+  const totalCost = useSelector(state => state.myWatches.totalCost)
   const dispatch = useDispatch()
 
   const handleSelectedSortKey = (event) =>  {

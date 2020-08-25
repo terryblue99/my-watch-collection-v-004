@@ -95,7 +95,7 @@ export default (state = initialState, { type, payload } ) => {
 
 		case SEARCH_WATCHES:
 
-			if (payload === '') {
+			if (payload === null) {
 				alert('Please enter a search value!\nIf a selection from available history is not working, you may need to retype it in the search box!')
 				return ({
 					...state,
