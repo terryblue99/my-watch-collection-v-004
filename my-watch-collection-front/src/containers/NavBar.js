@@ -114,7 +114,7 @@ const NavBar = () => {
             type='text'
             name='watch_search'
             placeholder='Search My Watch Collection'
-            onChange={handleChange}
+            onInput={handleChange}
           /> 
           <button className='Search-button Button-text' type='submit'><b>Search</b></button> 
         </form>
