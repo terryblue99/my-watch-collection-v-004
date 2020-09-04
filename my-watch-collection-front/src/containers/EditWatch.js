@@ -194,7 +194,7 @@ const EditWatch = (props) => {
                                              onChange={handleChange}/>
                                    </>
                               :    <> <label>Title</label>
-                                        <input className='Input-element'
+                                        <input className='Input-element' required
                                              autoComplete='off'
                                              type='text'
                                              name='watch_name'
