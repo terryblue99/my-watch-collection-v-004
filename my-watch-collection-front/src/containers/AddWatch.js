@@ -17,17 +17,28 @@ const AddWatch = (props) => {
           watch_maker: watchRelated,
           watch_name: '',
           movement: '',
+          complications: '',
           band: '',
           model_number: '',
           case_measurement: '',
           water_resistance: '',
-          complications: '',
           date_bought: '',
           cost: 0.00,
           notes: '',
           user_id: currentUser.user.id,
           image: null
      }
+
+     const {
+          watch_maker: watch_related,
+          watch_name: related_title,
+          movement: related_input1,
+          complications: related_input2,
+          band: related_input3,
+          model_number: related_input4,
+          case_measurement: related_input5,
+          water_resistance: related_input6
+     } = initialState
           
      const [backToDashboard, setBackToDashboard] = useState({isBackToDashboard: false})
      const [stateData, setStateData] = useState(initialState)
@@ -69,21 +80,37 @@ const AddWatch = (props) => {
           }   
           // Create the record
           const formData = new FormData()
-          formData.append('watch_maker', stateData.watch_maker)
-          formData.append('watch_name', stateData.watch_name)
-          formData.append('movement', stateData.movement)
-          formData.append('band', stateData.band)
-          formData.append('model_number', stateData.model_number)
-          formData.append('case_measurement', stateData.case_measurement)
-          formData.append('water_resistance', stateData.water_resistance)
-          formData.append('complications', stateData.complications)
-          formData.append('date_bought', stateData.date_bought)
-          formData.append('cost', stateData.cost)
-          formData.append('notes', stateData.notes)
-          formData.append('user_id', stateData.user_id)
-          if (stateData.image) {
-               formData.append('image', stateData.image)
-          }
+          if (!isWatchRelated) {
+               formData.append('watch_maker', stateData.watch_maker)
+               formData.append('watch_name', stateData.watch_name)
+               formData.append('movement', stateData.movement)
+               formData.append('band', stateData.band)
+               formData.append('model_number', stateData.model_number)
+               formData.append('case_measurement', stateData.case_measurement)
+               formData.append('water_resistance', stateData.water_resistance)
+               formData.append('complications', stateData.complications)
+               formData.append('date_bought', stateData.date_bought)
+               formData.append('cost', stateData.cost)
+               formData.append('notes', stateData.notes)
+               formData.append('user_id', stateData.user_id)
+               if (stateData.image) {
+                    formData.append('image', stateData.image)
+               }
+          } else {
+               formData.append('watch_related', watch_related)
+               formData.append('related_title', stateData.related_title)
+               formData.append('related_input1', stateData.related_input1)
+               formData.append('related_input2', stateData.related_input2)
+               formData.append('related_input3', stateData.related_input3)
+               formData.append('related_input4', stateData.related_input4)
+               formData.append('related_input5', stateData.related_input5)
+               formData.append('related_input6', stateData.related_input6)
+               formData.append('notes', stateData.notes)
+               formData.append('user_id', stateData.user_id)
+               if (stateData.image) {
+                    formData.append('image', stateData.image)
+               }
+          }    
           dispatch(addWatchAction(formData))
           if (!isWatchRelated) {
                alert('The watch has been added and saved!')
@@ -138,8 +165,8 @@ const AddWatch = (props) => {
                                    </>
                               :    <> <input className='Input-element'
                                              type='hidden'
-                                             name='watch_maker'
-                                             value={watchRelated}
+                                             name='watch_related'
+                                             value={watch_related}
                                              readonly/>
                                    </>
                          }
@@ -155,7 +182,7 @@ const AddWatch = (props) => {
                                    <input autoFocus id='Focus-first-input' required
                                              className='Input-element'
                                              type='text'
-                                             name='watch_name'
+                                             name='related_title'
                                              onChange={handleChange}/>
                                    </>
                          }
@@ -170,7 +197,7 @@ const AddWatch = (props) => {
                               :    <> <input className='Input-element'
                                              autoComplete='off'
                                              type='text'
-                                             name='movement'
+                                             name='related_input1'
                                              onChange={handleChange}/>
                                    </>
                          }
@@ -185,7 +212,7 @@ const AddWatch = (props) => {
                               :    <> <input className='Input-element'
                                              autoComplete='off'
                                              type='text'
-                                             name='complications'
+                                             name='related_input2'
                                              onChange={handleChange}/>
                                    </>
                          }
@@ -200,7 +227,7 @@ const AddWatch = (props) => {
                               :    <> <input className='Input-element'
                                              autoComplete='off'
                                              type='text'
-                                             name='band'
+                                             name='related_input3'
                                              onChange={handleChange}/>
                                    </>
                          }
@@ -215,7 +242,7 @@ const AddWatch = (props) => {
                               :    <> <input className='Input-element'
                                              autoComplete='off'
                                              type='text'
-                                             name='model_number'
+                                             name='related_input4'
                                              onChange={handleChange}/>
                                    </>
                          }
@@ -230,7 +257,7 @@ const AddWatch = (props) => {
                               :    <> <input className='Input-element'
                                              autoComplete='off'
                                              type='text'
-                                             name='case_measurement'
+                                             name='related_input5'
                                              onChange={handleChange}/>
                                    </>
                          }
@@ -245,7 +272,7 @@ const AddWatch = (props) => {
                               :    <> <input className='Input-element'
                                              autoComplete='off'
                                              type='text'
-                                             name='water_resistance'
+                                             name='related_input6'
                                              onChange={handleChange}/>
                                    </>
                          }
