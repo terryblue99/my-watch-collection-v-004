@@ -40,19 +40,27 @@ class Api::V4::WatchesController < ApplicationController
   def watch_params
       # params hash keys (strong params)
       params.permit(
-          :watch_name, 
-          :watch_maker, 
-          :movement, 
-          :complications,
-          :band, 
-          :model_number, 
-          :case_measurement,
-          :water_resistance, 
-          :date_bought, 
-          :cost,
-          :user_id,
-          :notes,
-          :image
+        :watch_name, 
+        :watch_maker, 
+        :movement, 
+        :complications,
+        :band, 
+        :model_number, 
+        :case_measurement,
+        :water_resistance, 
+        :date_bought, 
+        :cost,
+        :user_id,
+        :notes,
+        :image,
+        :watch_related,
+        :related_title,
+        :related_input1,
+        :related_input2,
+        :related_input3,
+        :related_input4,
+        :related_input5,
+        :related_input6
       )
   end
   
