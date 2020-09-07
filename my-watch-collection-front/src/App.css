@@ -377,6 +377,7 @@ img {
 }
 
 .WatchDetail-watch-maker,
+.WatchDetail-watch-related,
 .Watch-maker {
   font-family: 'Ubuntu, sans-serif';
   font-weight: bold;
@@ -388,7 +389,8 @@ img {
   font-size: .9rem;  
 }
 
-.WatchDetail-watch-maker {
+.WatchDetail-watch-maker,
+.WatchDetail-watch-related {
   font-size: 1.6rem;  
 }
 

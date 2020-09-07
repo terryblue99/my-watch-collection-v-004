@@ -123,6 +123,17 @@ const WatchDetail = (props) => {
             notes
         } = currentWatch
 
+        const {
+            watch_maker: watch_related,
+            watch_name: related_title,
+            movement: related_input1,
+            complications: related_input2,
+            band: related_input3,
+            model_number: related_input4,
+            case_measurement: related_input5,
+            water_resistance: related_input6
+       } = currentWatch
+
         return ( 
             
             <div className='Watch-detail'>
@@ -133,16 +144,22 @@ const WatchDetail = (props) => {
                     </div>
                 </div>
                 <div className='Watch-detail-text'>
-                    <h1 className='WatchDetail-watch-maker Dark-red-color'><b>{watch_maker}</b></h1> 
-                    <h2 className='Watch-name'>{watch_name}</h2>
+                    {watch_maker && !watch_maker.includes(watchRelated)
+                        ? <h1 className='WatchDetail-watch-maker Dark-red-color'><b>{watch_maker}</b></h1>
+                        : <h1 className='WatchDetail-watch-related Dark-red-color'><b>{watch_related}</b></h1> 
+                    }
+                    {watch_name && !watch_maker.includes(watchRelated)
+                        ? <h2 className='Watch-name'>{watch_name}</h2>
+                        : <h2 className='Watch-name'>{related_title}</h2>
+                    }
                     <div className='Watch-detail-complications Center-text'>
                         {movement && !watch_maker.includes(watchRelated)
                             ?   <>  <p className='Detail-css'>Movement</p>
                                     <h3 className='WatchDetail'>{movement}</h3>
                                 </>
                             :   null }
-                        {movement && watch_maker.includes(watchRelated) 
-                            ?   <>  <h3 className='WatchDetail'>{movement}</h3>
+                        {related_input1 !== 'undefined' && watch_related.includes(watchRelated) 
+                            ?   <>  <h3 className='WatchDetail'>{related_input1}</h3>
                                 </>
                             :   null }
                         {complications && !watch_maker.includes(watchRelated)
@@ -150,8 +167,8 @@ const WatchDetail = (props) => {
                                     <h3 className='WatchDetail'>{complications}</h3>
                                 </>
                             :   null }
-                        {complications && watch_maker.includes(watchRelated) 
-                            ?   <>  <h3 className='WatchDetail'>{complications}</h3>
+                        {related_input2 !== 'undefined' && watch_related.includes(watchRelated) 
+                            ?   <>  <h3 className='WatchDetail'>{related_input2}</h3>
                                 </>
                             :   null }
                         {band && !watch_maker.includes(watchRelated)
@@ -159,8 +176,8 @@ const WatchDetail = (props) => {
                                     <h3 className='WatchDetail'>{band}</h3>
                                 </>
                             :   null }
-                        {band && watch_maker.includes(watchRelated) 
-                            ?   <>  <h3 className='WatchDetail'>{band}</h3>
+                        {related_input3 !== 'undefined' && watch_related.includes(watchRelated) 
+                            ?   <>  <h3 className='WatchDetail'>{related_input3}</h3>
                                 </>
                             :   null }
                         {model_number && !watch_maker.includes(watchRelated)
@@ -168,8 +185,8 @@ const WatchDetail = (props) => {
                                     <h3 className='WatchDetail'>{model_number}</h3>
                                 </>
                             :   null }
-                        {model_number && watch_maker.includes(watchRelated) 
-                            ?   <>  <h3 className='WatchDetail'>{model_number}</h3>
+                        {related_input4 !== 'undefined' && watch_related.includes(watchRelated) 
+                            ?   <>  <h3 className='WatchDetail'>{related_input4}</h3>
                                 </>
                             :   null }
                         {case_measurement && !watch_maker.includes(watchRelated)
@@ -177,8 +194,8 @@ const WatchDetail = (props) => {
                                     <h3 className='WatchDetail'>{case_measurement}</h3>
                                 </>
                             :   null }
-                        {case_measurement && watch_maker.includes(watchRelated) 
-                            ?   <>  <h3 className='WatchDetail'>{case_measurement}</h3>
+                        {related_input5 !== 'undefined' && watch_related.includes(watchRelated) 
+                            ?   <>  <h3 className='WatchDetail'>{related_input5}</h3>
                                 </>
                             :   null }
                         {water_resistance && !watch_maker.includes(watchRelated)
@@ -186,34 +203,34 @@ const WatchDetail = (props) => {
                                     <h3 className='WatchDetail'>{water_resistance}</h3>
                                 </>
                             :   null }
-                        {water_resistance && watch_maker.includes(watchRelated) 
-                            ?   <>  <h3 className='WatchDetail'>{water_resistance}</h3>
+                        {related_input6 !== 'undefined' && watch_related.includes(watchRelated) 
+                            ?   <>  <h3 className='WatchDetail'>{related_input6}</h3>
                                 </>
                             :   null }
                         {date_bought && !watch_maker.includes(watchRelated) 
-                        ?   <>
-                                {cost > 0
-                                    ? <> <p className='Detail-css'>Date Bought</p>
-                                        <h3 className='WatchDetail'>{date_bought}</h3>
-                                    </>
-                                    : <> <p className='Detail-css'>Date RCVD</p>
-                                        <h3 className='WatchDetail'>{date_bought}</h3>
-                                    </>
-                                }    
-                            </>
-                        : null }
+                            ?   <>
+                                    {cost > 0
+                                        ? <> <p className='Detail-css'>Date Bought</p>
+                                            <h3 className='WatchDetail'>{date_bought}</h3>
+                                        </>
+                                        : <> <p className='Detail-css'>Date RCVD</p>
+                                            <h3 className='WatchDetail'>{date_bought}</h3>
+                                        </>
+                                    }    
+                                </>
+                            : null }
                         {cost > 0
-                        ?    <>
-                                <p className='Detail-css'>Cost</p>
-                                <h3 className='WatchDetail'>{parseFloat(cost).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</h3>
-                            </>
-                        : null }
+                            ?    <>
+                                    <p className='Detail-css'>Cost</p>
+                                    <h3 className='WatchDetail'>{parseFloat(cost).toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</h3>
+                                </>
+                            : null }
                         {notes 
-                        ?    <>
-                                <p className='Detail-css'>Notes</p>
-                                <h3 className='TextDetail'>{notes}</h3>
-                            </>
-                        : null }
+                            ?    <>
+                                    <p className='Detail-css'>Notes</p>
+                                    <h3 className='TextDetail'>{notes}</h3>
+                                </>
+                            : null }
                     </div> 
                     <div className="Edit-Delete-buttons">
                         {!watch_maker.includes(watchRelated)
