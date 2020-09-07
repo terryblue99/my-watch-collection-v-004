@@ -30,6 +30,36 @@ const EditWatch = (props) => {
      const [formInput, setFormInput] = useState({isFormInput: false})  
      const [backToDashboard, setBackToDashboard] = useState({isBackToDashboard: false})
 
+     let {
+          watch_maker: watch_related,
+          watch_name: related_title,
+          movement: related_input1,
+          complications: related_input2,
+          band: related_input3,
+          model_number: related_input4,
+          case_measurement: related_input5,
+          water_resistance: related_input6
+     } = stateData
+
+     if (related_input1 === 'undefined') {
+          related_input1 = ' '
+     }
+     if (related_input2 === 'undefined') {
+          related_input2 = ' '
+     }
+     if (related_input3 === 'undefined') {
+          related_input3 = ' '
+     }
+     if (related_input4 === 'undefined') {
+          related_input4 = ' '
+     }
+     if (related_input5 === 'undefined') {
+          related_input5 = ' '
+     }
+     if (related_input6 === 'undefined') {
+          related_input6 = ' '
+     }
+
      const setFormInputTrue = () => { 
           setFormInput(prevFormInput => {
                return {
@@ -79,21 +109,37 @@ const EditWatch = (props) => {
                }    
                // Edit the record
                const formData = new FormData()
-               formData.append('watch_maker', stateData.watch_maker)
-               formData.append('watch_name', stateData.watch_name)
-               formData.append('movement', stateData.movement)
-               formData.append('band', stateData.band)
-               formData.append('model_number', stateData.model_number)
-               formData.append('case_measurement', stateData.case_measurement)
-               formData.append('water_resistance', stateData.water_resistance)
-               formData.append('complications', stateData.complications)
-               formData.append('date_bought', stateData.date_bought)
-               formData.append('cost', stateData.cost)
-               formData.append('notes', stateData.notes)
-               formData.append('user_id', stateData.user_id)   
-               if (stateData.image) {
-                    formData.append('image', stateData.image)
-               }
+               if (!isWatchRelated) {
+                    formData.append('watch_maker', stateData.watch_maker)
+                    formData.append('watch_name', stateData.watch_name)
+                    formData.append('movement', stateData.movement)
+                    formData.append('band', stateData.band)
+                    formData.append('model_number', stateData.model_number)
+                    formData.append('case_measurement', stateData.case_measurement)
+                    formData.append('water_resistance', stateData.water_resistance)
+                    formData.append('complications', stateData.complications)
+                    formData.append('date_bought', stateData.date_bought)
+                    formData.append('cost', stateData.cost)
+                    formData.append('notes', stateData.notes)
+                    formData.append('user_id', stateData.user_id)   
+                    if (stateData.image) {
+                         formData.append('image', stateData.image)
+                    }
+               } else {
+                    formData.append('watch_related', watch_related)
+                    formData.append('related_title', related_title)
+                    formData.append('related_input1', related_input1)
+                    formData.append('related_input2', related_input2)
+                    formData.append('related_input3', related_input3)
+                    formData.append('related_input4', related_input4)
+                    formData.append('related_input5', related_input5)
+                    formData.append('related_input6', related_input6)
+                    formData.append('notes', stateData.notes)
+                    formData.append('user_id', stateData.user_id)   
+                    if (stateData.image) {
+                         formData.append('image', stateData.image)
+                    }
+               }    
                dispatch(editWatchAction(formData, stateData.id))
                if (!isWatchRelated) {
                     alert('The watch has been edited')
@@ -181,7 +227,7 @@ const EditWatch = (props) => {
                               :    <> <input className='Input-element'
                                              type='hidden'
                                              name='watch_maker'
-                                             value={stateData.watch_maker}/>
+                                             value={watch_related}/>
                                    </>
                          }
                          <br />
@@ -198,7 +244,7 @@ const EditWatch = (props) => {
                                              autoComplete='off'
                                              type='text'
                                              name='watch_name'
-                                             defaultValue={watch.watch_name}
+                                             defaultValue={related_title}
                                              onChange={handleChange}/>
                                    </>
                          }
@@ -215,7 +261,7 @@ const EditWatch = (props) => {
                                              autoComplete='off'
                                              type='text'
                                              name='movement'
-                                             defaultValue={watch.movement}
+                                             defaultValue={related_input1}
                                              onChange={handleChange}/>
                                    </>
                          }
@@ -232,7 +278,7 @@ const EditWatch = (props) => {
                                              autoComplete='off'
                                              type='text'
                                              name='complications'
-                                             defaultValue={watch.complications}
+                                             defaultValue={related_input2}
                                              onChange={handleChange}/>
                                    </>
                          }
@@ -249,7 +295,7 @@ const EditWatch = (props) => {
                                              autoComplete='off'
                                              type='text'
                                              name='band'
-                                             defaultValue={watch.band}
+                                             defaultValue={related_input3}
                                              onChange={handleChange}/>
                                    </>
                          }
@@ -266,7 +312,7 @@ const EditWatch = (props) => {
                                              autoComplete='off'
                                              type='text'
                                              name='model_number'
-                                             defaultValue={watch.model_number}
+                                             defaultValue={related_input4}
                                              onChange={handleChange}/>
                                    </>
                          }
@@ -283,7 +329,7 @@ const EditWatch = (props) => {
                                              autoComplete='off'
                                              type='text'
                                              name='case_measurement'
-                                             defaultValue={watch.case_measurement}
+                                             defaultValue={related_input5}
                                              onChange={handleChange}/>
                                    </>
                          }
@@ -300,7 +346,7 @@ const EditWatch = (props) => {
                                              autoComplete='off'
                                              type='text'
                                              name='water_resistance'
-                                             defaultValue={watch.water_resistance}
+                                             defaultValue={related_input6}
                                              onChange={handleChange}/>
                                    </>
                          }
