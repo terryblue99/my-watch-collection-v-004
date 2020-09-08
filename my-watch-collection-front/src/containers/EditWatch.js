@@ -103,7 +103,7 @@ const EditWatch = (props) => {
                if (stateData.watch_maker && !isWatchRelated) {
                     const isValidDate = DateValidation(stateData.date_bought)
                     if (!isValidDate) {
-                         alert('Date Bought/RCVD must be in format yyyy-mm-dd, yyyy-mm or yyyy and contain valid day & month numbers!')
+                         alert('Date Bought/RCVD must be in format yyyy-mm-dd, yyyy-mm or yyyy and contain valid year, day & month numbers!')
                          return
                     }
                }    
