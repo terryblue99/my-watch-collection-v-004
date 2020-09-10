@@ -65,7 +65,7 @@ export default (state = initialState, { type, payload } ) => {
 			case RESET_TOTAL_COST:		
 			return ({
 				...state,
-				comics: state.savedWatches,
+				watches: state.savedWatches,
 				totalCost: parseFloat(0)
 			})
 
@@ -99,7 +99,7 @@ export default (state = initialState, { type, payload } ) => {
 				alert('Please enter a search value!')
 				return ({
 					...state,
-					comics: state.savedComics,
+					watches: state.savedWatches,
 					totalCost: state.savedTotalCost
 				})
 			}
