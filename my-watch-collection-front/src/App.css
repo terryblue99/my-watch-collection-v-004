@@ -677,10 +677,6 @@ input[type=file] {
 /*#endregion buttons */
 
 /*#region Hamburger Icon*/
-/*  ==================
-      hamburger icon
-    ================== */
-
 .SidebarMobile-list-icon {
   margin: 1em;
   width: 40px;
@@ -717,10 +713,6 @@ input[type=file] {
 /*#endregion Hamburger Icon */
 
 /*#region Forms*/
-/*  =================
-          Forms
-    ================= */
-
 form {
   border-radius: .5em;
 }
