@@ -419,7 +419,7 @@ img {
 }
 /*#endregion Watch Detail*/
 
-/*#region Watch Related */
+/*#region Watch Related*/
 .Watch-related-total {
   font-size: 1.4rem;
 }
@@ -452,7 +452,7 @@ img {
 }
 /*#endregion Watch Related */
 
-/*#region buttons */
+/*#region buttons*/
 .active {
   color: gold;
 }
@@ -676,7 +676,7 @@ input[type=file] {
 }
 /*#endregion buttons */
 
-/*#region Hamburger Icon */
+/*#region Hamburger Icon*/
 /*  ==================
       hamburger icon
     ================== */
@@ -716,7 +716,7 @@ input[type=file] {
 }
 /*#endregion Hamburger Icon */
 
-/*#region Forms */
+/*#region Forms*/
 /*  =================
           Forms
     ================= */
@@ -875,7 +875,7 @@ textarea:required
 }
 /*#endregion Forms */
 
-/*#region Media Queries */
+/*#region Media Queries*/
 /*  ===================================
       media queries - placed last
       to override any other settings
