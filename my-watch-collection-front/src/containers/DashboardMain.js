@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch} from 'react-redux'
-import { hashHistory } from 'react-router' // Used to change URL without a re-render
+import { createHashHistory } from 'history' // Used to change URL without a re-render
 import logo from '../images/logo.jpg'
 import { sortWatchesAction, resetWatchesAction, resetSearchFailedAction, resetSortAction } from '../actions/watchesActions'
 import RedirectToWithState from "../components/RedirectToWithState"
 
 const DashboardMain = (props) => {
 
+  const hashHistory = createHashHistory() // Used to change URL without a re-render 
   const [stateData, setStateData] = useState({isSortRequired: false, sortOptionSelected: ''})
   const savedWatches = useSelector(state => state.myWatches.savedWatches)
   const watchRelated = useSelector(state => state.myWatches.watchRelated) // For records that are not related to a specific watch.
