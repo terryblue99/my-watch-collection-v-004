@@ -23,6 +23,7 @@ const AddWatch = (props) => {
           case_measurement: '',
           water_resistance: '',
           date_bought: '',
+          date_last_worn: '',
           cost: 0.00,
           notes: '',
           user_id: currentUser.user.id,
@@ -90,6 +91,7 @@ const AddWatch = (props) => {
                formData.append('water_resistance', stateData.water_resistance)
                formData.append('complications', stateData.complications)
                formData.append('date_bought', stateData.date_bought)
+               formData.append('date_last_worn', stateData.date_last_worn)
                formData.append('cost', stateData.cost)
                formData.append('notes', stateData.notes)
                formData.append('user_id', stateData.user_id)
@@ -282,6 +284,16 @@ const AddWatch = (props) => {
                                    <input className='Input-element' required
                                              type='text'
                                              name='date_bought'
+                                             onChange={handleChange}/>
+                                   </>
+                              : null
+                         }
+                         <br />
+                         {!isAddWatchRelated
+                              ?    <> <label>Date Last Worn (yyyy-mm-dd, yyyy-mm or yyyy)</label>
+                                   <input className='Input-element'
+                                             type='text'
+                                             name='date_last_worn'
                                              onChange={handleChange}/>
                                    </>
                               : null

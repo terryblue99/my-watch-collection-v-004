@@ -7,6 +7,8 @@ import {
 	GET_WATCHES, 
 	NEWEST_TO_OLDEST_SORT,
 	OLDEST_TO_NEWEST_SORT,
+	NEWEST_TO_OLDEST_WORN_SORT,
+	OLDEST_TO_NEWEST_WORN_SORT,
 	RESET_TOTAL_COST,
 	RESET_SEARCH_FAILED,
 	RESET_SORT,
@@ -122,6 +124,7 @@ export default (state = initialState, { type, payload } ) => {
 													watch.case_measurement.toLowerCase(),
 													watch.water_resistance.toLowerCase(),
 													watch.date_bought.toLowerCase(),
+													watch.date_last_worn.toLowerCase(),
 													watch.cost,
 													watch.notes.toLowerCase()
 												)
@@ -177,6 +180,22 @@ export default (state = initialState, { type, payload } ) => {
 				isSort: true,
 				watches: sortedWatches
 			})
+
+			case	NEWEST_TO_OLDEST_WORN_SORT:
+				sortedWatches = _.sortBy( state.watches, 'date_last_worn' )
+				return ({
+					...state,
+					isSort: true,
+					watches: sortedWatches.reverse()
+				})
+	
+			case	OLDEST_TO_NEWEST_WORN_SORT:
+				sortedWatches = _.sortBy( state.watches, 'date_last_worn' )
+				return ({
+					...state,
+					isSort: true,
+					watches: sortedWatches
+				})
 
 		case	COST_LOW_TO_HIGH_SORT:
 			sortedWatches = _.sortBy( state.watches, costToNumber )

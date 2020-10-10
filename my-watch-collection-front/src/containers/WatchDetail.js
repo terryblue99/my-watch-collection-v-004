@@ -119,6 +119,7 @@ const WatchDetail = (props) => {
             case_measurement,
             water_resistance,
             date_bought,
+            date_last_worn,
             cost,
             notes
         } = currentWatch
@@ -217,6 +218,12 @@ const WatchDetail = (props) => {
                                             <h3 className='WatchDetail'>{date_bought}</h3>
                                         </>
                                     }    
+                                </>
+                            : null }
+                            {date_last_worn && !watch_maker.includes(watchRelated) 
+                            ?   <>     
+                                    <p className='Detail-css'>Date Last Worn</p>
+                                    <h3 className='WatchDetail'>{date_last_worn}</h3>      
                                 </>
                             : null }
                         {cost > 0

@@ -57,6 +57,8 @@ const DashboardMain = (props) => {
         <option value='Watch Name'>Watch Name</option>
         <option value='Newest to Oldest'>Newest to Oldest</option>
         <option value='Oldest to Newest'>Oldest to Newest</option>
+        <option value='Newest to Oldest Worn'>Newest to Oldest Worn</option>
+        <option value='Oldest to Newest Worn'>Oldest to Newest Worn</option>
         <option value='Cost Low to High'>Cost Low to High</option>
         <option value='Cost High to Low'>Cost High to Low</option>
       </select>

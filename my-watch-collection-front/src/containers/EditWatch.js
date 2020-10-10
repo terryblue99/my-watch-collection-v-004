@@ -21,6 +21,7 @@ const EditWatch = (props) => {
           case_measurement: props.location.state.watch.case_measurement,
           water_resistance: props.location.state.watch.water_resistance,
           date_bought: props.location.state.watch.date_bought,
+          date_last_worn: props.location.state.watch.date_last_worn,
           cost: props.location.state.watch.cost,
           notes: props.location.state.watch.notes,
           user_id: props.location.state.watch.user_id,
@@ -106,7 +107,14 @@ const EditWatch = (props) => {
                          alert('Date Bought/RCVD must be in format yyyy-mm-dd, yyyy-mm or yyyy and contain valid year, day & month numbers!')
                          return
                     }
-               }    
+               }
+               if (stateData.watch_maker && stateData.date_last_worn && !isWatchRelated) {
+                    const isValidDate = DateValidation(stateData.date_last_worn)
+                    if (!isValidDate) {
+                         alert('Date Last Worn must be in format yyyy-mm-dd, yyyy-mm or yyyy and contain valid year, day & month numbers!')
+                         return
+                    }
+               }   
                // Edit the record
                const formData = new FormData()
                if (!isWatchRelated) {
@@ -119,6 +127,7 @@ const EditWatch = (props) => {
                     formData.append('water_resistance', stateData.water_resistance)
                     formData.append('complications', stateData.complications)
                     formData.append('date_bought', stateData.date_bought)
+                    formData.append('date_last_worn', stateData.date_last_worn)
                     formData.append('cost', stateData.cost)
                     formData.append('notes', stateData.notes)
                     formData.append('user_id', stateData.user_id)   
@@ -357,6 +366,17 @@ const EditWatch = (props) => {
                                              type='text'
                                              name='date_bought'
                                              defaultValue={watch.date_bought}
+                                             onChange={handleChange}/>
+                                   </>
+                              : null
+                         }
+                         <br />
+                         {!isEditWatchRelated
+                              ?    <> <label>Date Last Worn (yyyy-mm-dd, yyyy-mm or yyyy)</label>
+                                        <input className='Input-element'
+                                             type='text'
+                                             name='date_last_worn'
+                                             defaultValue={watch.date_last_worn}
                                              onChange={handleChange}/>
                                    </>
                               : null
