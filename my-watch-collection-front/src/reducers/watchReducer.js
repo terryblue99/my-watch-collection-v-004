@@ -123,6 +123,7 @@ export default (state = initialState, { type, payload } ) => {
 													watch.model_number.toLowerCase(),
 													watch.case_measurement.toLowerCase(),
 													watch.water_resistance.toLowerCase(),
+													watch.date_bought,
 													watch.cost,
 													watch.notes.toLowerCase()
 												)
