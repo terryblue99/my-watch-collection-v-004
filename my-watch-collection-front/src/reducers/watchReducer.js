@@ -123,8 +123,6 @@ export default (state = initialState, { type, payload } ) => {
 													watch.model_number.toLowerCase(),
 													watch.case_measurement.toLowerCase(),
 													watch.water_resistance.toLowerCase(),
-													watch.date_bought.toLowerCase(),
-													watch.date_last_worn.toLowerCase(),
 													watch.cost,
 													watch.notes.toLowerCase()
 												)
@@ -181,21 +179,21 @@ export default (state = initialState, { type, payload } ) => {
 				watches: sortedWatches
 			})
 
-			case	NEWEST_TO_OLDEST_WORN_SORT:
-				sortedWatches = _.sortBy( state.watches, 'date_last_worn' )
-				return ({
-					...state,
-					isSort: true,
-					watches: sortedWatches.reverse()
-				})
-	
-			case	OLDEST_TO_NEWEST_WORN_SORT:
-				sortedWatches = _.sortBy( state.watches, 'date_last_worn' )
-				return ({
-					...state,
-					isSort: true,
-					watches: sortedWatches
-				})
+		case	NEWEST_TO_OLDEST_WORN_SORT:
+			sortedWatches = _.sortBy( state.watches, 'date_last_worn' )
+			return ({
+				...state,
+				isSort: true,
+				watches: sortedWatches.reverse()
+			})
+
+		case	OLDEST_TO_NEWEST_WORN_SORT:
+			sortedWatches = _.sortBy( state.watches, 'date_last_worn' )
+			return ({
+				...state,
+				isSort: true,
+				watches: sortedWatches
+			})
 
 		case	COST_LOW_TO_HIGH_SORT:
 			sortedWatches = _.sortBy( state.watches, costToNumber )

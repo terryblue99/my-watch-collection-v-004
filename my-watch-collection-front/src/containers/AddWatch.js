@@ -31,14 +31,7 @@ const AddWatch = (props) => {
      }
 
      const {
-          watch_maker: watch_related,
-          watch_name: related_title,
-          movement: related_input1,
-          complications: related_input2,
-          band: related_input3,
-          model_number: related_input4,
-          case_measurement: related_input5,
-          water_resistance: related_input6
+          watch_maker: watch_related
      } = initialState
           
      const [backToDashboard, setBackToDashboard] = useState({isBackToDashboard: false})
