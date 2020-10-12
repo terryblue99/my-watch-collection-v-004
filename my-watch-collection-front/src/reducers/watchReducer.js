@@ -23,6 +23,7 @@ const initialState = {
 	isSort: false,
 	watches: [],
 	savedWatches: [],
+	savedWatchRelated: [],
 	sortDefaultText: 'Select a sort option...',
 	watchRelated: 'Watch-Related', // For records that are not related to a specific watch.
 	totalCost: parseFloat(0),
@@ -46,12 +47,15 @@ export default (state = initialState, { type, payload } ) => {
 
 		case GET_WATCHES:
 			if (payload) {
+				const watchesData = payload.sortedWatchData.filter(watch => watch.watch_maker !== state.watchRelated)
+				const relatedData = payload.sortedWatchData.filter(watch => watch.watch_maker === state.watchRelated)
 				return ({
 					...state,
 					WatchRelated: state.WatchRelated,
 					isSearchFailed: payload.isSearchFailed,
-					savedWatches: payload.sortedWatches,
-					watches: payload.sortedWatches,
+					watches: watchesData,
+					savedWatches: watchesData,
+					savedWatchRelated: relatedData,
 					totalCost: payload.totalCost,
 					savedTotalCost: payload.totalCost
 				})

@@ -10,7 +10,7 @@ import {
 import _ from 'lodash'
 
 const API_URL = '/api/v4'
-let sortedWatches
+let sortedWatchData
 
 export const getWatchesAction = (user_id, isSearchFailed = false) => {
 	// Thunk middleware knows how to handle functions.
@@ -29,7 +29,7 @@ export const getWatchesAction = (user_id, isSearchFailed = false) => {
 		.then(response => {
 			// Sort the watches using the underscore functions _.chain & _.sortBy
 			// Sort by watch name within watch maker for the initial dashboard screen
-			sortedWatches = _.chain(response)
+			sortedWatchData = _.chain(response)
 				.sortBy('watch_name')
 				.sortBy('watch_maker')
 				.value()
@@ -41,7 +41,7 @@ export const getWatchesAction = (user_id, isSearchFailed = false) => {
 			// Update watch states with the sorted result
 			dispatch({
 				type: GET_WATCHES, 
-				payload: {sortedWatches, totalCost, isSearchFailed}
+				payload: {sortedWatchData, totalCost, isSearchFailed}
 			})
 		})
 		.catch(error => {
