@@ -372,7 +372,7 @@ const EditWatch = (props) => {
                          }
                          <br />
                          {!isEditWatchRelated
-                              ?    <> <label>Date Last Worn (yyyy-mm-dd, yyyy-mm or yyyy)</label>
+                              ?    <> <label>Date Last Worn (blank, yyyy-mm-dd, yyyy-mm or yyyy)</label>
                                         <input className='Input-element'
                                              type='text'
                                              name='date_last_worn'
