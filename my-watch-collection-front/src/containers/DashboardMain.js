@@ -9,8 +9,9 @@ const DashboardMain = (props) => {
 
   const hashHistory = createHashHistory() // Used to change URL without a re-render 
   const [stateData, setStateData] = useState({isSortRequired: false, sortOptionSelected: ''})
-  const savedWatches = useSelector(state => state.myWatches.savedWatches)
+  const Watches = useSelector(state => state.myWatches.watches)
   const watchRelated = useSelector(state => state.myWatches.watchRelated) // For records that are not related to a specific watch.
+  const savedWatchRelated = useSelector(state => state.myWatches.savedWatchRelated)
   const sortDefaultText = useSelector(state => state.myWatches.sortDefaultText)
   const isSearchFailed = useSelector(state => state.myWatches.isSearchFailed)
   const totalCost = useSelector(state => state.myWatches.totalCost)
@@ -39,10 +40,6 @@ const DashboardMain = (props) => {
   let oldestWatchMaker
   let oldestWatchDate
 
-  let number_of_watches = 0
-  let number_of_watcheRelated = 0
-
-  const number_of_saved_watches = Object.keys(savedWatches).length
   const sortElement = [
     <>
       <h2 className='Center-text'>Sort By</h2>
@@ -64,7 +61,6 @@ const DashboardMain = (props) => {
       </select>
     </>
   ]
-
 
   if (props.sortOptionSelected && props.sortOptionSelected === sortDefaultText ) {
       if (document.getElementById('Select-sort') !== null) {
@@ -92,13 +88,10 @@ const DashboardMain = (props) => {
       oldestWatchImage = props.oldestWatch.image
       oldestWatchMaker = props.oldestWatch.watch_maker
       oldestWatchDate = props.oldestWatch.date_bought
-
-      number_of_watches = Object.keys(props.filteredWatches).length
   }
-
-  if (props.filteredWatchRelated) {
-      number_of_watcheRelated = Object.keys(props.filteredWatchRelated).length
-  }
+  
+  const number_of_watches = Object.keys(Watches).length
+  const number_of_watcheRelated = Object.keys(savedWatchRelated).length
 
   if (stateData.isSortRequired) {
       setStateData(prevStateData => {
@@ -130,7 +123,7 @@ const DashboardMain = (props) => {
     <div className='DashboardMain'>
 
       <div className='Dashboard-item Dashboard-initialList'>
-        { number_of_saved_watches > 1
+        { number_of_watches > 1
           ? <>
               <button className='btn FullList-button Button-text' 
                 // Fetch all records and delete the DashBoard history location state
@@ -160,9 +153,23 @@ const DashboardMain = (props) => {
             : null
         }
         { number_of_watcheRelated > 0
-            ? <p className='Dashboard-totalWatchRelated Center-text'>Total watch-related: <span className='Watch-related-total'>{number_of_watcheRelated}</span></p>
-            : null
-        }   
+          ? <>
+              <button className='btn FullList-button Button-text' 
+                // Fetch all records and delete the DashBoard history location state
+                // so that the initial sort option text can be displayed
+                onClick={() => {  dispatch(resetWatchesAction())
+                                  if (props.DashBoardHistory && props.DashBoardHistory.location.state) {
+                                        delete props.DashBoardHistory.location.state                                                                               
+                                  }             
+                }               
+              }> 
+                Display Watch Related List
+              </button>
+              <br />
+              <p className='Dashboard-totalWatchRelated Center-text'>Total watch-related: <span className='Watch-related-total'>{number_of_watcheRelated}</span></p>
+            </>
+          : null
+        }
       </div>
       <div className='Dashboard-item Dashboard-sort'> 
         <h1 className='Dashboard-header Dark-red-color Center-text'>Dashboard</h1>
@@ -172,12 +179,12 @@ const DashboardMain = (props) => {
           ? sortElement
           : null
         }
-        { number_of_watches === 0 && number_of_saved_watches === 0
+        { number_of_watches === 0
           ? welcome
           : null
         }
       </div>
-      { number_of_watches !== 0 && number_of_saved_watches !== 0
+      { number_of_watches !== 0
           ? <div className='Dashboard-item'>
               <iframe className='Dashboard-time' 
                       title='clockFrame' 
@@ -218,7 +225,7 @@ const DashboardMain = (props) => {
         }
         <br />
       </div>
-      {number_of_watches !== 0 && number_of_saved_watches !== 0
+      {number_of_watches !== 0
         ? <div className='Dashboard-item Dashboard-logo'>
             <img src={logo} alt='logo' />
           </div>

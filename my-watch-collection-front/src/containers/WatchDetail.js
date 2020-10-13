@@ -275,8 +275,6 @@ const WatchDetail = (props) => {
         return <DashboardMain   newestWatch={props.newestWatch}
                                 oldestWatch={props.oldestWatch}
                                 setCurrentWatch={props.setCurrentWatch}
-                                filteredWatches={props.filteredWatches}
-                                filteredWatchRelated={props.filteredWatchRelated}
                                 sortOptionSelected={props.sortOptionSelected}
                                 DashBoardHistory={props.DashBoardHistory}              
         />
