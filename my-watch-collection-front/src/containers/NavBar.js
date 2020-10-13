@@ -10,6 +10,7 @@ const NavBar = () => {
   const [searchData, setSearchData] = useState({isSearchRequested: false, searchText: null})
   const currentUser = useSelector(state => state.currentUser)
   const watches = useSelector(state => state.myWatches.watches)
+  const savedWatches = useSelector(state => state.myWatches.savedWatches)
   const dispatch = useDispatch()
 
   const handleChange = (event) => {
@@ -65,8 +66,11 @@ const NavBar = () => {
                 })
                 // Clear the form
                 ClearForm('Nav-search-form')
-
-                alert('Search not found. Please correct and try again!')
+                if (savedWatches.length > 0) {
+                  alert('Search not found. Please correct and try again!')
+                } else {
+                  alert('No watches have been added to search on!')
+                }  
                 // Display original list on the dashboard
                 return  RedirectToWithState (
                                               '/dashboard',

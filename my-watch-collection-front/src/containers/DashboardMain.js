@@ -128,7 +128,7 @@ const DashboardMain = (props) => {
     <div className='DashboardMain'>
 
       <div className='Dashboard-item Dashboard-initialList'>
-        { number_of_watches > 1
+        { number_of_saved_watches > 0 
           ? <>
               <button className='btn FullList-button Button-text' 
                 // Fetch all watch records and delete the DashBoard history location state
