@@ -24,7 +24,7 @@ const initialState = {
 	savedWatches: [],
 	savedWatchRelated: [],
 	watchRelated: 'Watch-Related', // For records that are not related to a specific watch.
-	sortDefaultText: 'Select a sort option...',
+	sortDefaultText: 'Select a sort option for watches...',
 	totalCost: parseFloat(0),
 	savedTotalCost: parseFloat(0),
 	isSearchFailed: false,
