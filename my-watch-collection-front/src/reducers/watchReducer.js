@@ -20,15 +20,16 @@ import {
 } from '../actions/types'
 
 const initialState = {
-	isSearchFailed: false,
-	isSort: false,
 	watches: [],
 	savedWatches: [],
 	savedWatchRelated: [],
-	sortDefaultText: 'Select a sort option...',
 	watchRelated: 'Watch-Related', // For records that are not related to a specific watch.
+	sortDefaultText: 'Select a sort option...',
 	totalCost: parseFloat(0),
-	savedTotalCost: parseFloat(0)
+	savedTotalCost: parseFloat(0),
+	isSearchFailed: false,
+	isSort: false,
+	isWatchRelatedDisplayed: false
 }
 let sortedWatches
 
@@ -53,7 +54,7 @@ export default (state = initialState, { type, payload } ) => {
 				return ({
 					...state,
 					WatchRelated: state.WatchRelated,
-					isSearchFailed: payload.isSearchFailed,
+					isSearchFailed: false,
 					watches: watchesData,
 					savedWatches: watchesData,
 					savedWatchRelated: relatedData,
@@ -66,13 +67,15 @@ export default (state = initialState, { type, payload } ) => {
 			return ({
 				...state,
 				watches: state.savedWatches,
-				totalCost: state.savedTotalCost
+				totalCost: state.savedTotalCost,
+				isWatchRelatedDisplayed: false
 			})
 
 		case WATCH_RELATED:		
 			return ({
 				...state,
-				watches: state.savedWatchRelated
+				watches: state.savedWatchRelated,
+				isWatchRelatedDisplayed: true
 			})
 
 		case RESET_TOTAL_COST:		
@@ -85,7 +88,7 @@ export default (state = initialState, { type, payload } ) => {
 		case RESET_SEARCH_FAILED:
 			return ({
 				...state,
-				isSearchFailed: payload
+				isSearchFailed: false
 			})
 
 		case DELETE_WATCH:

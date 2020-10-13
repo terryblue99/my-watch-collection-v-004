@@ -13,7 +13,7 @@ import _ from 'lodash'
 const API_URL = '/api/v4'
 let sortedWatchData
 
-export const getWatchesAction = (user_id, isSearchFailed = false) => {
+export const getWatchesAction = (user_id) => {
 	// Thunk middleware knows how to handle functions.
 	// It passes the dispatch method as an argument to the function,
 	// thus making it able to dispatch actions itself.
@@ -42,7 +42,7 @@ export const getWatchesAction = (user_id, isSearchFailed = false) => {
 			// Update watch states with the sorted result
 			dispatch({
 				type: GET_WATCHES, 
-				payload: {sortedWatchData, totalCost, isSearchFailed}
+				payload: {sortedWatchData, totalCost}
 			})
 		})
 		.catch(error => {
@@ -96,11 +96,10 @@ export const resetSortAction = () => {
 	}		
 }
 
-export const resetSearchFailedAction = (isSearchFailed = false) => {
+export const resetSearchFailedAction = () => {
 	return dispatch => {
 		dispatch({
-			type: RESET_SEARCH_FAILED,
-			payload: isSearchFailed
+			type: RESET_SEARCH_FAILED
 		})
 	}		
 }
