@@ -139,7 +139,7 @@ const DashboardMain = (props) => {
                                   }             
                 }               
               }> 
-                Redisplay Initial List
+                Display All Watches
               </button>
             </>
           : null
@@ -157,7 +157,7 @@ const DashboardMain = (props) => {
               </p>
             : null
         }
-        { number_of_watcheRelated > 0 && number_of_watches > 0 && !isWatchRelatedDisplayed
+        { number_of_watcheRelated > 0 && number_of_watches > 0
           ? <>
               <button className='btn FullList-button Button-text' 
                 // Fetch all watch related records and delete the DashBoard history location state

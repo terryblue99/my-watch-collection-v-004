@@ -69,7 +69,7 @@ const NavBar = () => {
                 if (savedWatches.length > 0) {
                   alert('Search not found. Please correct and try again!')
                 } else {
-                  alert('No watches have been added to search on!')
+                  alert('There is nothing to search on!')
                 }  
                 // Display original list on the dashboard
                 return  RedirectToWithState (
