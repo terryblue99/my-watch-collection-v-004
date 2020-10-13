@@ -15,7 +15,8 @@ import {
 	RESET_WATCHES,
 	SEARCH_WATCHES,
 	WATCH_MAKER_SORT,
-	WATCH_NAME_SORT
+	WATCH_NAME_SORT,
+	WATCH_RELATED
 } from '../actions/types'
 
 const initialState = {
@@ -68,7 +69,13 @@ export default (state = initialState, { type, payload } ) => {
 				totalCost: state.savedTotalCost
 			})
 
-			case RESET_TOTAL_COST:		
+		case WATCH_RELATED:		
+			return ({
+				...state,
+				watches: state.savedWatchRelated
+			})
+
+		case RESET_TOTAL_COST:		
 			return ({
 				...state,
 				watches: state.savedWatches,

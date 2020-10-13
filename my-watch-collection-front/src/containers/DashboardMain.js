@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch} from 'react-redux'
 import { createHashHistory } from 'history' // Used to change URL without a re-render
 import logo from '../images/logo.jpg'
-import { sortWatchesAction, resetWatchesAction, resetSearchFailedAction, resetSortAction } from '../actions/watchesActions'
+import { sortWatchesAction, resetWatchesAction, 
+         watchRelatedAction, resetSearchFailedAction, 
+         resetSortAction } from '../actions/watchesActions'
 import RedirectToWithState from "../components/RedirectToWithState"
 
 const DashboardMain = (props) => {
@@ -128,7 +130,7 @@ const DashboardMain = (props) => {
         { number_of_watches > 1
           ? <>
               <button className='btn FullList-button Button-text' 
-                // Fetch all records and delete the DashBoard history location state
+                // Fetch all watch records and delete the DashBoard history location state
                 // so that the initial sort option text can be displayed
                 onClick={() => {  dispatch(resetWatchesAction())
                                   if (props.DashBoardHistory && props.DashBoardHistory.location.state) {
@@ -157,9 +159,9 @@ const DashboardMain = (props) => {
         { number_of_watcheRelated > 0 && number_of_watches > 0
           ? <>
               <button className='btn FullList-button Button-text' 
-                // Fetch all records and delete the DashBoard history location state
+                // Fetch all watch related records and delete the DashBoard history location state
                 // so that the initial sort option text can be displayed
-                onClick={() => {  dispatch(resetWatchesAction())
+                onClick={() => {  dispatch(watchRelatedAction())
                                   if (props.DashBoardHistory && props.DashBoardHistory.location.state) {
                                         delete props.DashBoardHistory.location.state                                                                               
                                   }             
