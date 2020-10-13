@@ -15,6 +15,7 @@ const Watches = ({ watches, watchRelated, sortOptionSelected, isSearchSuccessful
     if(watches?.length > 0) {
         // Sort the watch records by date bought using the underscore function _.sortBy
         const sortedWatches = _.sortBy( watches, 'date_bought' )
+        
         oldestWatch = sortedWatches[0]
         newestWatch = sortedWatches[sortedWatches.length-1] 
         

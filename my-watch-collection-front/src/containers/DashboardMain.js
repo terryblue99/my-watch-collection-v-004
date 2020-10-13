@@ -10,6 +10,7 @@ const DashboardMain = (props) => {
   const hashHistory = createHashHistory() // Used to change URL without a re-render 
   const [stateData, setStateData] = useState({isSortRequired: false, sortOptionSelected: ''})
   const Watches = useSelector(state => state.myWatches.watches)
+  const savedWatches = useSelector(state => state.myWatches.savedWatches)
   const watchRelated = useSelector(state => state.myWatches.watchRelated) // For records that are not related to a specific watch.
   const savedWatchRelated = useSelector(state => state.myWatches.savedWatchRelated)
   const sortDefaultText = useSelector(state => state.myWatches.sortDefaultText)
@@ -91,6 +92,7 @@ const DashboardMain = (props) => {
   }
   
   const number_of_watches = Object.keys(Watches).length
+  const number_of_saved_watches = Object.keys(savedWatches).length
   const number_of_watcheRelated = Object.keys(savedWatchRelated).length
 
   if (stateData.isSortRequired) {
@@ -152,7 +154,7 @@ const DashboardMain = (props) => {
               </p>
             : null
         }
-        { number_of_watcheRelated > 0
+        { number_of_watcheRelated > 0 && number_of_watches > 0
           ? <>
               <button className='btn FullList-button Button-text' 
                 // Fetch all records and delete the DashBoard history location state
@@ -163,7 +165,7 @@ const DashboardMain = (props) => {
                                   }             
                 }               
               }> 
-                Display Watch Related List
+                Display Watch Related
               </button>
               <br />
               <p className='Dashboard-totalWatchRelated Center-text'>Total watch-related: <span className='Watch-related-total'>{number_of_watcheRelated}</span></p>
@@ -179,7 +181,7 @@ const DashboardMain = (props) => {
           ? sortElement
           : null
         }
-        { number_of_watches === 0
+        { number_of_saved_watches === 0
           ? welcome
           : null
         }
