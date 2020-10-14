@@ -96,7 +96,7 @@ const DashboardMain = (props) => {
   
   const number_of_watches = Object.keys(Watches).length
   const number_of_saved_watches = Object.keys(savedWatches).length
-  const number_of_watcheRelated = Object.keys(savedWatchRelated).length
+  const number_of_watchRelated = Object.keys(savedWatchRelated).length
 
   if (stateData.isSortRequired) {
       setStateData(prevStateData => {
@@ -157,7 +157,7 @@ const DashboardMain = (props) => {
               </p>
             : null
         }
-        { number_of_watcheRelated > 0 && number_of_watches > 0
+        { number_of_watchRelated > 0 && number_of_watches > 0
           ? <>
               <button className='btn FullList-button Button-text' 
                 // Fetch all watch related records and delete the DashBoard history location state
@@ -174,8 +174,8 @@ const DashboardMain = (props) => {
           : null
         }
         <br />
-        { number_of_watcheRelated > 0 && number_of_watches > 0
-          ? <p className='Dashboard-totalWatchRelated Center-text'>Total watch-related: <span className='Watch-related-total'>{number_of_watcheRelated}</span></p>
+        { number_of_watchRelated > 0 && number_of_watches > 0
+          ? <p className='Dashboard-totalWatchRelated Center-text'>Total watch-related: <span className='Watch-related-total'>{number_of_watchRelated}</span></p>
           : null
         }
       </div>
