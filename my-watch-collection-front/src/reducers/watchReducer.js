@@ -127,7 +127,9 @@ export default (state = initialState, { type, payload } ) => {
 				searchText = payload.toLowerCase()
 			}
 			
-			const searchArray = state.watches.filter(watch => {
+			const watches_and_related = state.savedWatches.concat(state.savedWatchRelated)
+
+			const searchArray = watches_and_related.filter(watch => {
 				watchArray = []
 				watchArray.push( watch.watch_name.toLowerCase(),
 													watch.watch_maker.toLowerCase(),
