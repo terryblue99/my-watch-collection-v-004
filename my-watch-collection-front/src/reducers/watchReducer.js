@@ -95,8 +95,9 @@ export default (state = initialState, { type, payload } ) => {
 			if (payload) {
 				return ({
 					...state,
+					watches: state.watches.filter(watch => watch.id !== payload),
 					savedWatches: state.savedWatches.filter(watch => watch.id !== payload),
-					watches: state.watches.filter(watch => watch.id !== payload)
+					savedWatchRelated: state.savedWatchRelated.filter(watch => watch.id !== payload)
 				})
 			} else return state		
 
@@ -126,11 +127,22 @@ export default (state = initialState, { type, payload } ) => {
 			if (payload !== null) {
 				searchText = payload.toLowerCase()
 			}
-			
-			const watches_and_related = state.savedWatches.concat(state.savedWatchRelated)
 
-			const searchArray = watches_and_related.filter(watch => {
+			let watchesSearchData
+			if (state.savedWatchRelated.length === 0) {
+				watchesSearchData = state.savedWatches
+			} else {
+				watchesSearchData = state.savedWatches.concat(state.savedWatchRelated)
+			}
+
+			const searchArray = watchesSearchData.filter(watch => {
 				watchArray = []
+				if (watch.date_last_worn === null) {
+					watch.date_last_worn = ''
+				}
+				if (watch.date_bought === null) {
+					watch.date_bought = ''
+				}
 				watchArray.push( watch.watch_name.toLowerCase(),
 													watch.watch_maker.toLowerCase(),
 													watch.movement.toLowerCase(),
@@ -140,6 +152,7 @@ export default (state = initialState, { type, payload } ) => {
 													watch.case_measurement.toLowerCase(),
 													watch.water_resistance.toLowerCase(),
 													watch.date_bought,
+													watch.date_last_worn,
 													watch.cost,
 													watch.notes.toLowerCase()
 												)

@@ -5,7 +5,6 @@ import NavBar from './NavBar'
 import Watches from '../components/Watches'
 
 const DashBoard = (props) => {
-    
     const currentUser = useSelector(state => state.currentUser)
     const watches = useSelector(state => state.myWatches.watches)
     const watchRelated = useSelector(state => state.myWatches.watchRelated)

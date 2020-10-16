@@ -8,7 +8,6 @@ import { sortWatchesAction, resetWatchesAction,
 import RedirectToWithState from "../components/RedirectToWithState"
 
 const DashboardMain = (props) => {
-
   const hashHistory = createHashHistory() // Used to change URL without a re-render 
   const [stateData, setStateData] = useState({isSortRequired: false, sortOptionSelected: ''})
   const Watches = useSelector(state => state.myWatches.watches)
