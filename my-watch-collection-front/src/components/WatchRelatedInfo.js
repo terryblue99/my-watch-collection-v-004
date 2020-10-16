@@ -19,8 +19,9 @@ const WatchRelatedInfo = ()  => {
         <h2 className='WatchRelated-text Dark-red-color Center-text'>Watch-Related Information</h2>
         < br/>
         <p>Watch-Related records can contain any type of information</p>
-        <p>related to watches. For example, winders, cases, tools, straps,</p>
-        <p>bracelets, spare parts, 'how to' info, etc.</p>
+        <p>related to watches. For example, winders, cases, tools,</p>
+        <p>straps, bracelets, spare parts, 'how to' info, etc. Images</p>
+        <p>for these will not be displayed on the main dashboard.</p>
         < br/>
         <p><span className='WatchRelated-note'>Note:</span> Information about a specific saved watch can be entered in</p>
         <p className='WatchRelated-info-tab'>the <span className='Blue-color'>Notes</span> input field of that watch.</p>
