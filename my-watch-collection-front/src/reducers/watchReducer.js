@@ -55,6 +55,7 @@ export default (state = initialState, { type, payload } ) => {
 				return ({
 					...state,
 					WatchRelated: state.WatchRelated,
+					isSearchResultRelated: false,
 					isSearchFailed: false,
 					watches: watchesData,
 					savedWatches: watchesData,
@@ -69,6 +70,7 @@ export default (state = initialState, { type, payload } ) => {
 				...state,
 				watches: state.savedWatches,
 				totalCost: state.savedTotalCost,
+				isSearchResultRelated: false,
 				isWatchRelatedDisplayed: false
 			})
 
