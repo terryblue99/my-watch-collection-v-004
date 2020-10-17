@@ -14,6 +14,7 @@ const DashboardMain = (props) => {
   const savedWatches = useSelector(state => state.myWatches.savedWatches)
   const watchRelated = useSelector(state => state.myWatches.watchRelated) // For records that are not related to a specific watch.
   const isWatchRelatedDisplayed = useSelector(state => state.myWatches.isWatchRelatedDisplayed)
+  const isSearchResultRelated = useSelector(state => state.myWatches.isSearchResultRelated)
   const savedWatchRelated = useSelector(state => state.myWatches.savedWatchRelated)
   const sortDefaultText = useSelector(state => state.myWatches.sortDefaultText)
   const isSearchFailed = useSelector(state => state.myWatches.isSearchFailed)
@@ -93,7 +94,7 @@ const DashboardMain = (props) => {
       oldestWatchDate = props.oldestWatch.date_bought
   }
   
-  const number_of_watches = Object.keys(Watches).length
+  let [number_of_watches, number_search_result] = Array(2).fill(Object.keys(Watches).length)
   const number_of_saved_watches = Object.keys(savedWatches).length
   const number_of_watchRelated = Object.keys(savedWatchRelated).length
 
@@ -137,15 +138,19 @@ const DashboardMain = (props) => {
                                         delete props.DashBoardHistory.location.state                                                                               
                                   }             
                 }               
-              }> 
+              }>
                 Display All Watches
               </button>
             </>
           : null
         }
         <br />
-        { number_of_watches > 0 && !isWatchRelatedDisplayed
-            ? <p className='Dashboard-totalWatches Center-text'>Total watches: <span className='Watch-total'>{number_of_watches}</span></p>
+        { number_of_watches > 0 && !isWatchRelatedDisplayed && !isSearchResultRelated
+            ? <p className='Dashboard-totalWatches Center-text'>Total Watches: <span className='Watch-total'>{number_of_watches}</span></p>
+            : null
+        }
+        { number_of_watches > 0 && !isWatchRelatedDisplayed && isSearchResultRelated
+            ? <p className='Dashboard-totalWatches Center-text'>Search Results: <span className='Watch-total'>{number_search_result}</span></p>
             : null
         }
         { number_of_watches > 0 && totalCost > 0 && !isWatchRelatedDisplayed
@@ -174,7 +179,7 @@ const DashboardMain = (props) => {
         }
         <br />
         { number_of_watchRelated > 0 && number_of_watches > 0
-          ? <p className='Dashboard-totalWatchRelated Center-text'>Total watch-related: <span className='Watch-related-total'>{number_of_watchRelated}</span></p>
+          ? <p className='Dashboard-totalWatchRelated Center-text'>Total Watch Related: <span className='Watch-related-total'>{number_of_watchRelated}</span></p>
           : null
         }
       </div>

@@ -27,6 +27,7 @@ const initialState = {
 	sortDefaultText: 'Select a sort option for watches...',
 	totalCost: parseFloat(0),
 	savedTotalCost: parseFloat(0),
+	isSearchResultRelated: false,
 	isSearchFailed: false,
 	isSort: false,
 	isWatchRelatedDisplayed: false
@@ -129,6 +130,7 @@ export default (state = initialState, { type, payload } ) => {
 			}
 
 			let watchesSearchData
+			let relatedFound = false
 			if (state.savedWatchRelated.length === 0) {
 				watchesSearchData = state.savedWatches
 			} else {
@@ -136,6 +138,7 @@ export default (state = initialState, { type, payload } ) => {
 			}
 
 			const searchArray = watchesSearchData.filter(watch => {
+
 				watchArray = []
 				if (watch.date_last_worn === null) {
 					watch.date_last_worn = ''
@@ -143,18 +146,18 @@ export default (state = initialState, { type, payload } ) => {
 				if (watch.date_bought === null) {
 					watch.date_bought = ''
 				}
-				watchArray.push( watch.watch_name.toLowerCase(),
-													watch.watch_maker.toLowerCase(),
-													watch.movement.toLowerCase(),
-													watch.complications.toLowerCase(),
-													watch.band.toLowerCase(),
-													watch.model_number.toLowerCase(),
-													watch.case_measurement.toLowerCase(),
-													watch.water_resistance.toLowerCase(),
-													watch.date_bought,
-													watch.date_last_worn,
-													watch.cost,
-													watch.notes.toLowerCase()
+				watchArray.push( watch.watch_maker.toLowerCase(),
+												 watch.watch_name.toLowerCase(),
+												 watch.movement.toLowerCase(),
+												 watch.complications.toLowerCase(),
+												 watch.band.toLowerCase(),
+												 watch.model_number.toLowerCase(),
+												 watch.case_measurement.toLowerCase(),
+												 watch.water_resistance.toLowerCase(),
+												 watch.date_bought,
+												 watch.date_last_worn,
+												 watch.cost,
+												 watch.notes.toLowerCase()
 												)
 				// check array of record string fields for searchText string/substring
 				return watchArray.some(watchStringField => watchStringField.includes(searchText))
@@ -166,10 +169,15 @@ export default (state = initialState, { type, payload } ) => {
 				return total
 			}, 0)
 
+			if (searchArray.some(item => item.watch_maker === state.watchRelated)) {
+				relatedFound = state.watchRelated
+			}
+
 			return ({
 				...state,
 				watches: searchArray,
-				totalCost: totalCost
+				totalCost: totalCost,
+				isSearchResultRelated: relatedFound
 			})
 		
 		// SORT WATCHES & WATCH-RELATED
