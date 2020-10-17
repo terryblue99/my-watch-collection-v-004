@@ -103,8 +103,7 @@ const WatchDetail = (props) => {
 
     const {currentWatch} = props
     
-    if (currentWatch && 
-        !props.isSearchSuccessful && 
+    if (currentWatch &&
         !isSearchFailed &&
         !isSort) 
     {
