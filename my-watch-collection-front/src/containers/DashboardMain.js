@@ -5,7 +5,7 @@ import logo from '../images/logo.jpg'
 import { sortWatchesAction, resetWatchesAction, 
          watchRelatedAction, resetSearchFailedAction, 
          resetSortAction } from '../actions/watchesActions'
-import RedirectToWithState from "../components/RedirectToWithState"
+import RedirectTo from "../components/RedirectToWithState"
 
 const DashboardMain = (props) => {
   
@@ -107,13 +107,7 @@ const DashboardMain = (props) => {
         }
       })  
       // Display the sorted list on the dashboard
-      return  RedirectToWithState(
-                                    '/dashboard',
-                                    {
-                                      isFromDashboardMain: true,
-                                      sortOptionSelected: stateData.sortOptionSelected
-                                    } 
-                                  )
+      return  RedirectTo('/dashboard')
   }
 
   if (isSearchFailed) {
