@@ -13,8 +13,9 @@ const Watches = ({ watches, watchRelated, sortOptionSelected, DashBoardHistory }
     let newestWatch
 
     if(watches?.length > 0) {
-        // Sort the watch records by date bought using the underscore function _.sortBy
+        // Filter out records that are not watch related
         const filteredWatches = watches.filter(watch => watch.watch_maker !== watchRelated)
+        // Sort the watch records by date bought using the underscore function _.sortBy
         const sortedWatches = _.sortBy( filteredWatches, 'date_bought' )
         
         oldestWatch = sortedWatches[0]
