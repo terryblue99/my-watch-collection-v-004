@@ -219,7 +219,7 @@ const WatchDetail = (props) => {
                                     }    
                                 </>
                             : null }
-                            {date_last_worn && !watch_maker.includes(watchRelated) 
+                        {date_last_worn && !watch_maker.includes(watchRelated) 
                             ?   <>     
                                     <p className='Detail-css'>Date Last Worn</p>
                                     <h3 className='WatchDetail'>{date_last_worn}</h3>      
