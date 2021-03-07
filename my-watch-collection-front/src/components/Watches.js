@@ -3,7 +3,8 @@ import _ from 'lodash'  // https://underscorejs.org/)
 import WatchDetail from '../containers/WatchDetail'
 import WatchList from './WatchList'
 import SidebarMobile from './SidebarMobile'
-// The following comment is required for @emotion to work
+// The following commens are required for @emotion to work
+/** @jsxRuntime classic */
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core' // https://github.com/emotion-js/emotion
 
