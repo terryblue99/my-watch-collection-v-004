@@ -15,11 +15,11 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   host: 127.0.0.1
+  password: "38Mysql!2381"
 
 development:
   <<: *default
   database: my_watch_collection_development
-  
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
